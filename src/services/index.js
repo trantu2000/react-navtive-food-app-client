@@ -1,3 +1,4 @@
-import StorageService from './StorageService';
+import StorageService from "./StorageService";
+import StaticImageService from "./StaticImageService";
 
-export { StorageService };
+export { StorageService, StaticImageService };
