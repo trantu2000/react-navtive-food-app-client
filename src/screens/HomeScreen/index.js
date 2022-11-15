@@ -21,9 +21,49 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Mock from "../../constants/Mock";
 import CategoryMenuItem from "../../components/CategoryMenuItem";
 import RestaurantCard from "../../components/RestaurantCard";
+import RestaurantMediumCard from "../../components/RestaurantMediumCard";
+
+const restaurants = [
+  {
+    id: "0",
+    name: "KiChi KiChi",
+    images:
+      "https://i2.wp.com/dinhhuong.vn/wp-content/uploads/2018/10/thiet-ke-thi-cong-nha-hang-lau-bang-chuyen-kichi-kichi-4.jpg?fit=1500%2C900",
+  },
+  {
+    id: "1",
+    name: "MC Donal",
+    images:
+      "https://global-uploads.webflow.com/60af8c708c6f35480d067652/61a2ea3a06fdbcd5b4f51079_screenshot_1638066729.png",
+  },
+  {
+    id: "2",
+    name: "KFC",
+    images: "http://kyluc.vn/Userfiles/Upload/images/239z22.jpg",
+  },
+  {
+    id: "3",
+    name: "Chicken Plus",
+    images:
+      "https://lh3.googleusercontent.com/p/AF1QipOtRHzgmjkmtuTd1MNyPIY1XOCyzqRTgrpMJavE=w1080-h608-p-no-v0",
+  },
+  {
+    id: "4",
+    name: "Texas",
+    images:
+      "https://oms.hotdeal.vn/images/editors/sources/000355061509/355061-355061-body%20(37).jpg",
+  },
+];
+
+const sortStyle = (isActive) =>
+  isActive
+    ? styles.sortListItem
+    : { ...styles.sortListItem, borderBottomColor: Colors.DEFAULT_WHITE };
 
 const HomeScreen = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState();
+  // const [restaurants, setRestaurants] = useState(null);
+  const [activeSortItem, setActiveSortItem] = useState("Gần đây");
   return (
     <View style={styles.container}>
       <StatusBar
@@ -91,12 +131,63 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.listHeaderTitle}>Xếp hạng hàng đầu</Text>
             <Text style={styles.listHeaderSubtitle}>Xem tất cả</Text>
           </View>
-          <FlatList>
-            
-          </FlatList>
-          <RestaurantCard/>
-          
+          <FlatList
+            data={restaurants}
+            keyExtractor={(item) => item?.id}
+            horizontal
+            ListHeaderComponent={() => <Separator width={20} />}
+            ListFooterComponent={() => <Separator width={20} />}
+            renderItem={({ item }) => (
+              <RestaurantCard
+                {...item}
+                navigate={(restaurantId) =>
+                  navigation.navigate("Restaurant", { restaurantId })
+                }
+              />
+            )}
+          />
         </View>
+        <View style={styles.sortListContainer}>
+          <TouchableOpacity
+            style={sortStyle(activeSortItem === "Gần đây")}
+            activeOpacity={0.8}
+            onPress={() => setActiveSortItem("Gần đây")}
+          >
+            <Text style={styles.sortListItemText}>Gần đây</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={sortStyle(activeSortItem === "Yêu thích")}
+            activeOpacity={0.8}
+            onPress={() => setActiveSortItem("Yêu thích")}
+          >
+            <Text style={styles.sortListItemText}>Yêu thích</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={sortStyle(activeSortItem === "Xếp hạng")}
+            activeOpacity={0.8}
+            onPress={() => setActiveSortItem("Xếp hạng")}
+          >
+            <Text style={styles.sortListItemText}>Xếp hạng</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={sortStyle(activeSortItem === "Phổ biến")}
+            activeOpacity={0.8}
+            onPress={() => setActiveSortItem("Phổ biến")}
+          >
+            <Text style={styles.sortListItemText}>Phổ biến</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={sortStyle(activeSortItem === "Xu hướng")}
+            activeOpacity={0.8}
+            onPress={() => setActiveSortItem("Xu hướng")}
+          >
+            <Text style={styles.sortListItemText}>Xu hướng</Text>
+          </TouchableOpacity>
+        </View>
+        {restaurants?.map((item) => (
+          <RestaurantMediumCard {...item} key={item?.id} />
+        ))}
+        <Separator height={Display.setHeight(5)} />
       </ScrollView>
     </View>
   );
@@ -192,6 +283,7 @@ const styles = StyleSheet.create({
   },
   horizontalListContainer: {
     marginTop: 40,
+    // paddingHorizontal:20
   },
   listHeader: {
     flexDirection: "row",
@@ -211,5 +303,27 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 13 * 1.4,
     // fontFamily: Fonts.POPPINS_MEDIUM,
+  },
+  sortListContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    backgroundColor: Colors.DEFAULT_WHITE,
+    marginTop: 8,
+    elevation: 1,
+  },
+  sortListItem: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.DEFAULT_YELLOW,
+    height: 50,
+  },
+  sortListItemText: {
+    color: Colors.DEFAULT_BLACK,
+    fontSize: 13,
+    lineHeight: 13 * 1.4,
+    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
   },
 });

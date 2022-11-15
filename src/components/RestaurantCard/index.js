@@ -5,17 +5,25 @@ import Colors from "../../constants/Colors";
 import Images from "../../constants/Images";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-const RestaurantCard = () => {
+const RestaurantCard = ({
+  id,
+  name,
+  images,
+  tags,
+  distance,
+  time,
+  navigate,
+}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
       <IonIcons
         name="bookmark"
         color={Colors.DEFAULT_YELLOW}
         size={24}
         style={styles.bookmark}
       />
-      <Image source={Images.MCDONAL} style={styles.posterStyle} />
-      <Text style={styles.titleText}>MC DoNal</Text>
+      <Image source={{ uri: images }} style={styles.posterStyle} />
+      <Text style={styles.titleText}>{name}</Text>
       <Text style={styles.tagText}>Bugger, chicken, pizza</Text>
       <View style={styles.footerContainer}>
         <View style={styles.rowAndCenter}>
@@ -54,17 +62,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: Colors.DEFAULT_WHITE,
     borderRadius: 10,
-    elevation: 3,
+    elevation: 10,
     marginBottom: 5,
+    marginRight: 10,
   },
   posterStyle: {
     width: 1920 * 0.15,
     height: 1080 * 0.15,
     borderRadius: 10,
-    margin: 15,
+    margin: 10,
   },
   titleText: {
-    marginLeft: 15,
+    marginLeft: 10,
     fontSize: 15,
     lineHeight: 13 * 1.4,
     // fontFamily: Fonts.POPPINS_MEDIUM,
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   tagText: {
-    marginLeft: 15,
+    marginLeft: 10,
     fontSize: 11,
     lineHeight: 11 * 1.4,
     // fontFamily: Fonts.POPPINS_MEDIUM,
@@ -87,7 +96,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     marginBottom: 6,
     justifyContent: "space-between",
   },
