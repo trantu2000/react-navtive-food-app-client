@@ -12,4 +12,5 @@ export default {
   DESSERT: require("../../assets/images/dessert.png"),
   NOODLES: require("../../assets/images/noodles.png"),
   DRINKS: require("../../assets/images/drinks.png"),
+  MCDONAL: require("../../assets/images//mcdonal.png"),
 };

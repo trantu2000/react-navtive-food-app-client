@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ScrollView,
+  FlatList,
 } from "react-native";
 import React, { useState } from "react";
 import Colors from "../../constants/Colors";
@@ -18,6 +20,7 @@ import ToggleButton from "../../components/ToggleButton";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Mock from "../../constants/Mock";
 import CategoryMenuItem from "../../components/CategoryMenuItem";
+import RestaurantCard from "../../components/RestaurantCard";
 
 const HomeScreen = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState();
@@ -82,6 +85,19 @@ const HomeScreen = ({ navigation }) => {
           ))}
         </View>
       </View>
+      <ScrollView style={styles.listContainer}>
+        <View style={styles.horizontalListContainer}>
+          <View style={styles.listHeader}>
+            <Text style={styles.listHeaderTitle}>Xếp hạng hàng đầu</Text>
+            <Text style={styles.listHeaderSubtitle}>Xem tất cả</Text>
+          </View>
+          <FlatList>
+            
+          </FlatList>
+          <RestaurantCard/>
+          
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -169,5 +185,31 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginTop: 20,
+  },
+  listContainer: {
+    paddingVertical: 5,
+    zIndex: -5,
+  },
+  horizontalListContainer: {
+    marginTop: 40,
+  },
+  listHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginBottom: 5,
+  },
+  listHeaderTitle: {
+    color: Colors.DEFAULT_BLACK,
+    fontSize: 16,
+    lineHeight: 16 * 1.4,
+    // fontFamily: Fonts.POPPINS_MEDIUM,
+  },
+  listHeaderSubtitle: {
+    color: Colors.DEFAULT_YELLOW,
+    fontSize: 13,
+    lineHeight: 13 * 1.4,
+    // fontFamily: Fonts.POPPINS_MEDIUM,
   },
 });
