@@ -90,7 +90,10 @@ const SignInScreen = ({ navigation }) => {
           Quên mật khẩu?
         </Text>
       </View>
-      <TouchableOpacity style={styles.signInButton}>
+      <TouchableOpacity
+        style={styles.signInButton}
+        onPress={() => navigation.navigate("HomeScreen")}
+      >
         <Text style={styles.signInButtonText}>Đăng nhập</Text>
       </TouchableOpacity>
       <View style={styles.signUpContainer}>
@@ -268,7 +271,7 @@ const styles = StyleSheet.create({
   },
   facebookButton: {
     backgroundColor: Colors.FABEBOOK_BLUE,
-    paddingVertical: 15,
+    paddingVertical: 10,
     marginHorizontal: 20,
     marginVertical: 10,
     borderRadius: 8,

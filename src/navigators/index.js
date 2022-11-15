@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   ForgotPasswordScreen,
+  HomeScreen,
   RegisterPhoneScreen,
   SignInScreen,
   SignUpScreen,
@@ -29,7 +30,11 @@ const Navigators = () => {
           name="RegisterPhoneScreen"
           component={RegisterPhoneScreen}
         />
-        <Stack.Screen name="VerificationScreen" component={VerificationScreen} />
+        <Stack.Screen
+          name="VerificationScreen"
+          component={VerificationScreen}
+        />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
