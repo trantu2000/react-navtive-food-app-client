@@ -128,7 +128,12 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView style={styles.listContainer}>
         <View style={styles.horizontalListContainer}>
           <View style={styles.listHeader}>
-            <Text style={styles.listHeaderTitle}>Xếp hạng hàng đầu</Text>
+            <Text
+              style={styles.listHeaderTitle}
+              onPress={() => navigation.navigate("RestaurantScreen")}
+            >
+              Xếp hạng hàng đầu
+            </Text>
             <Text style={styles.listHeaderSubtitle}>Xem tất cả</Text>
           </View>
           <FlatList

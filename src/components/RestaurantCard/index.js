@@ -5,17 +5,13 @@ import Colors from "../../constants/Colors";
 import Images from "../../constants/Images";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-const RestaurantCard = ({
-  id,
-  name,
-  images,
-  tags,
-  distance,
-  time,
-  navigate,
-}) => {
+const RestaurantCard = ({ name, images}) => {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      
+    >
       <IonIcons
         name="bookmark"
         color={Colors.DEFAULT_YELLOW}
