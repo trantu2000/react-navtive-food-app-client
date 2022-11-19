@@ -6,7 +6,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
 const FoodCart = ({ id, name, description, price, image, navigate }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <TouchableOpacity onPress={() => navigate()} activeOpacity={0.8}>
         <Image
           style={styles.image}

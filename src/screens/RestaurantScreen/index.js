@@ -623,11 +623,26 @@ const ListFooter = () => (
   </View>
 );
 
-const RestaurantScreen = () => {
-  const [selectedCategory, setSelectedCategory] = useState(restaurants[0].categories[0]);
+const RestaurantScreen = ({ navigation }) => {
+  const [selectedCategory, setSelectedCategory] = useState(
+    restaurants[0].categories[0]
+  );
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="default" translucent backgroundColor="transparent" />
+      {/* <StatusBar barStyle="default" translucent backgroundColor="transparent" /> */}
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={Colors.DEFAULT_WHITE}
+        translucent
+      />
+      <Separator height={StatusBar.currentHeight} />
+      <View style={styles.headerContainer}>
+        <IonIcons
+          name="chevron-back-outline"
+          size={30}
+          onPress={() => navigation.goBack()}
+        />
+      </View>
       <Image
         source={{
           uri: "https://phuongnamdigital.com/thumbh/360/uploads/tin-tuc/mcdonald.jpg",
@@ -695,7 +710,13 @@ const RestaurantScreen = () => {
             {foods
               ?.filter((food) => food?.category === selectedCategory)
               ?.map((item) => (
-                <FoodCart key={item?.id} {...item} />
+                <FoodCart
+                  key={item?.id}
+                  {...item}
+                  navigate={() =>
+                    navigation.navigate("FoodScreen", { foodId: item?.id })
+                  }
+                />
               ))}
             <Separator height={Display.setHeight(2)} />
           </View>
@@ -711,6 +732,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    marginTop: 10,
+    zIndex: 10,
   },
   backgroundImage: {
     position: "absolute",
