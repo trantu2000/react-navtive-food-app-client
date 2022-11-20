@@ -17,7 +17,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Images from "../../constants/Images";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const CartScreen = () => {
+const CartScreen = ({navigation}) => {
   const [cart, setCart] = useState(0);
   return (
     <View style={styles.container}>
