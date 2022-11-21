@@ -14,9 +14,34 @@ import IonIcons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 import { Display } from "../../utils";
 import Images from "../../constants/Images";
+import LottieView from "lottie-react-native";
+import AuthenticationService from "../../services/AuthenticationService";
 
 const SignInScreen = ({ navigation }) => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
+  const register = () => {
+    let user = {
+      username,
+      email,
+      password,
+    };
+    setIsLoading(true);
+    AuthenticationService.register(user).then((response) => {
+      setIsLoading(false);
+      // console.log(response);
+      if (!response?.status) {
+        setErrorMessage(response?.message);
+      }
+    });
+  };
   return (
     <View style={styles.container}>
       <StatusBar
@@ -50,9 +75,11 @@ const SignInScreen = ({ navigation }) => {
             placeholderTextColor={Colors.DEFAULT_GREY}
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
+            onChangeText={(text) => setUsername(text)}
           />
         </View>
       </View>
+      <Text style={styles.errorMessage}>{usernameErrorMessage}</Text>
       <View style={styles.inputContainer}>
         <View style={styles.inputSubContainer}>
           <Feather
@@ -66,9 +93,11 @@ const SignInScreen = ({ navigation }) => {
             placeholderTextColor={Colors.DEFAULT_GREY}
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
+            onChangeText={(text) => setEmail(text)}
           />
         </View>
       </View>
+      <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
       <View style={styles.inputContainer}>
         <View style={styles.inputSubContainer}>
           <Feather
@@ -83,6 +112,7 @@ const SignInScreen = ({ navigation }) => {
             placeholderTextColor={Colors.DEFAULT_GREY}
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
+            onChangeText={(text) => setPassword(text)}
           />
           <Feather
             name={isPasswordShow ? "eye" : "eye-off"}
@@ -93,9 +123,14 @@ const SignInScreen = ({ navigation }) => {
           />
         </View>
       </View>
+      <Text style={styles.errorMessage}>{errorMessage}</Text>
 
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInButtonText}>Tạo tài khoản</Text>
+      <TouchableOpacity style={styles.signInButton} onPress={() => register()}>
+        {isLoading ? (
+          <LottieView source={Images.LOADING} autoPlay />
+        ) : (
+          <Text style={styles.signInButtonText}>Tạo tài khoản</Text>
+        )}
       </TouchableOpacity>
       <View style={styles.signUpContainer}>
         <Text style={styles.accountText}>Bạn đã có tài khoản?</Text>
@@ -137,7 +172,9 @@ const SignInScreen = ({ navigation }) => {
             <Image source={Images.GOOGLE} style={styles.signInButtonLogo} />
           </View>
 
-          <Text style={styles.socialSignInButtonText}>Đăng nhập với Google</Text>
+          <Text style={styles.socialSignInButtonText}>
+            Đăng nhập với Google
+          </Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -266,7 +303,7 @@ const styles = StyleSheet.create({
     // fontFamily: Fonts.POPPINS_MEDIUM,
     marginLeft: 5,
     alignSelf: "center",
-    marginBottom:10
+    marginBottom: 10,
   },
   facebookButton: {
     backgroundColor: Colors.FABEBOOK_BLUE,
@@ -316,5 +353,13 @@ const styles = StyleSheet.create({
   signInButtonLogo: {
     height: 18,
     width: 18,
+  },
+  errorMessage: {
+    fontSize: 12,
+    lineHeight: 10 * 1.4,
+    color: Colors.DEFAULT_RED,
+    // fontFamily: Fonts.POPPINS_MEDIUM,
+    marginHorizontal: 20,
+    marginVertical: 3,
   },
 });
