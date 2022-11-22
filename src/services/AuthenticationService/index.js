@@ -26,4 +26,18 @@ const register = async (user) => {
   }
 };
 
-export default { register };
+const checkUserExist = async (type, value) => {
+  try {
+    let params = { [type]: value };
+    let userCheckResponse = await AuthRequest.get(
+      ApiConstants.BACKEND_API.USER_EXIST,
+      { params }
+    );
+    return userCheckResponse?.data;
+  } catch (error) {
+    console.log(error);
+    return { status: false, message: "Oops! Something went wrong" };
+  }
+};
+
+export default { register ,checkUserExist};

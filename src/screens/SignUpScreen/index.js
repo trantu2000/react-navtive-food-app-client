@@ -24,8 +24,10 @@ const SignInScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
-  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const [emailState, setEmailState] = useState("default");
+  const [usernameState, setUsernameState] = useState("default");
 
   const register = () => {
     let user = {
@@ -42,6 +44,31 @@ const SignInScreen = ({ navigation }) => {
       }
     });
   };
+
+  const checkUserExist = async (type, value) => {
+    if (value?.length > 0) {
+      AuthenticationService.checkUserExist(type, value).then((response) => {
+        if (response?.status) {
+          type === "email" && emailErrorMessage
+            ? setEmailErrorMessage("")
+            : null;
+          type === "username" && usernameErrorMessage
+            ? setUsernameErrorMessage("")
+            : null;
+          type === "email" ? setEmailState("valid") : null;
+          type === "username" ? setUsernameState("valid") : null;
+        } else {
+          type === "email" ? setEmailErrorMessage(response?.message) : null;
+          type === "username"
+            ? setUsernameErrorMessage(response?.message)
+            : null;
+          type === "email" ? setEmailState("invalid") : null;
+          type === "username" ? setUsernameState("invalid") : null;
+        }
+      });
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -76,6 +103,9 @@ const SignInScreen = ({ navigation }) => {
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
             onChangeText={(text) => setUsername(text)}
+            onEndEditing={({ nativeEvent: { text } }) =>
+              checkUserExist("username", text)
+            }
           />
         </View>
       </View>
@@ -94,6 +124,9 @@ const SignInScreen = ({ navigation }) => {
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
             onChangeText={(text) => setEmail(text)}
+            onEndEditing={({nativeEvent: {text}}) =>
+              checkUserExist('email', text)
+            }
           />
         </View>
       </View>
