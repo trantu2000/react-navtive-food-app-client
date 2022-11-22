@@ -15,9 +15,23 @@ import Feather from "react-native-vector-icons/Feather";
 import { Display } from "../../utils";
 import Images from "../../constants/Images";
 import ToggleButton from "../../components/ToggleButton";
+import LottieView from 'lottie-react-native';
 
 const SignInScreen = ({ navigation }) => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const signIn = async () => {
+    setIsLoading(true);
+    let user = {
+      username,
+      password,
+    };
+    console.log(user);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -51,6 +65,7 @@ const SignInScreen = ({ navigation }) => {
             placeholderTextColor={Colors.DEFAULT_GREY}
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
+            onChangeText={(text) => setUsername(text)}
           />
         </View>
       </View>
@@ -68,6 +83,7 @@ const SignInScreen = ({ navigation }) => {
             placeholderTextColor={Colors.DEFAULT_GREY}
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
+            onChangeText={(text) => setPassword(text)}
           />
           <Feather
             name={isPasswordShow ? "eye" : "eye-off"}
@@ -92,9 +108,14 @@ const SignInScreen = ({ navigation }) => {
       </View>
       <TouchableOpacity
         style={styles.signInButton}
-        onPress={() => navigation.navigate("HomeScreen")}
+        onPress={() => signIn()}
+        activeOpacity={0.8}
       >
-        <Text style={styles.signInButtonText}>Đăng nhập</Text>
+        {isLoading ? (
+          <LottieView source={Images.LOADING} autoPlay />
+        ) : (
+          <Text style={styles.signInButtonText}>Đăng nhập</Text>
+        )}
       </TouchableOpacity>
       <View style={styles.signUpContainer}>
         <Text style={styles.accountText}>Bạn chưa có tài khoản?</Text>

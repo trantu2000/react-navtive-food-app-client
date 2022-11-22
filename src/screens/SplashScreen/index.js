@@ -6,11 +6,11 @@ import Images from "../../constants/Images";
 import { Display } from "../../utils";
 
 const SplashScreen = ({ navigation }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate("WelcomeScreen");
-    },3000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigation.navigate("WelcomeScreen");
+  //   },3000);
+  // }, []);
   return (
     <View style={styles.container}>
       <StatusBar
