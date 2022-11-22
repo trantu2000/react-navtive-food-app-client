@@ -16,6 +16,51 @@ import { Display } from "../../utils";
 import Images from "../../constants/Images";
 import LottieView from "lottie-react-native";
 import AuthenticationService from "../../services/AuthenticationService";
+import AntDesign from "react-native-vector-icons/AntDesign";
+
+const inputStyle = (state) => {
+  switch (state) {
+    case "valid":
+      return {
+        ...styles.inputContainer,
+        borderWidth: 1,
+        borderColor: Colors.SECONDARY_GREEN,
+      };
+    case "invalid":
+      return {
+        ...styles.inputContainer,
+        borderWidth: 1,
+        borderColor: Colors.DEFAULT_RED,
+      };
+    default:
+      return styles.inputContainer;
+  }
+};
+
+const showMarker = (state) => {
+  switch (state) {
+    case "valid":
+      return (
+        <AntDesign
+          name="checkcircleo"
+          color={Colors.SECONDARY_GREEN}
+          size={18}
+          style={{ marginLeft: 5 }}
+        />
+      );
+    case "invalid":
+      return (
+        <AntDesign
+          name="closecircleo"
+          color={Colors.DEFAULT_RED}
+          size={18}
+          style={{ marginLeft: 5 }}
+        />
+      );
+    default:
+      return null;
+  }
+};
 
 const SignInScreen = ({ navigation }) => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -52,6 +97,7 @@ const SignInScreen = ({ navigation }) => {
           type === "email" && emailErrorMessage
             ? setEmailErrorMessage("")
             : null;
+
           type === "username" && usernameErrorMessage
             ? setUsernameErrorMessage("")
             : null;
@@ -89,7 +135,7 @@ const SignInScreen = ({ navigation }) => {
       <Text style={styles.content}>
         Nhập email của bạn, chọn tên người dùng và mật khẩu
       </Text>
-      <View style={styles.inputContainer}>
+      <View style={inputStyle(usernameState)}>
         <View style={styles.inputSubContainer}>
           <Feather
             name="user"
@@ -107,10 +153,11 @@ const SignInScreen = ({ navigation }) => {
               checkUserExist("username", text)
             }
           />
+          {showMarker(usernameState)}
         </View>
       </View>
       <Text style={styles.errorMessage}>{usernameErrorMessage}</Text>
-      <View style={styles.inputContainer}>
+      <View style={inputStyle(emailState)}>
         <View style={styles.inputSubContainer}>
           <Feather
             name="mail"
@@ -124,10 +171,11 @@ const SignInScreen = ({ navigation }) => {
             selectionColor={Colors.DEFAULT_GREY}
             style={styles.inputText}
             onChangeText={(text) => setEmail(text)}
-            onEndEditing={({nativeEvent: {text}}) =>
-              checkUserExist('email', text)
+            onEndEditing={({ nativeEvent: { text } }) =>
+              checkUserExist("email", text)
             }
           />
+          {showMarker(emailState)}
         </View>
       </View>
       <Text style={styles.errorMessage}>{emailErrorMessage}</Text>

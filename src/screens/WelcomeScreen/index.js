@@ -14,7 +14,7 @@ import { Display } from "../../utils";
 import Separator from "../../components/Separator";
 // import Fonts from "../../constants/Fonts";
 import { StorageService } from "../../services";
-import { GeneralAction } from "../../actions";
+
 
 const pageStyle = (isActive) =>
   isActive

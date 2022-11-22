@@ -26,13 +26,15 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.9",
     "react-navigation": "^4.4.4",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
   },
   "private": true,
   "projectConfig": {
-    "backendApiBaseUrl": "http://192.168.3.123:3000"
+    "backendApiBaseUrl": "http://192.168.110.243:3000"
   }
 }
