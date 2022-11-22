@@ -15,13 +15,20 @@ import Feather from "react-native-vector-icons/Feather";
 import { Display } from "../../utils";
 import Images from "../../constants/Images";
 import ToggleButton from "../../components/ToggleButton";
-import LottieView from 'lottie-react-native';
+import LottieView from "lottie-react-native";
+
+import { useDispatch } from "react-redux";
+import { AuthenticationService, StorageService } from "../../services";
+import { GeneralAction } from "../../Redux/Actions";
 
 const SignInScreen = ({ navigation }) => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const dispatch = useDispatch();
 
   const signIn = async () => {
     setIsLoading(true);
@@ -29,7 +36,16 @@ const SignInScreen = ({ navigation }) => {
       username,
       password,
     };
-    console.log(user);
+    AuthenticationService.login(user).then((response) => {
+      setIsLoading(false);
+      if (response?.status) {
+        StorageService.setToken(response?.data).then(() => {
+          dispatch(GeneralAction.setToken(response?.data));
+        });
+      } else {
+        setErrorMessage(response?.message);
+      }
+    });
   };
 
   return (
@@ -94,6 +110,7 @@ const SignInScreen = ({ navigation }) => {
           />
         </View>
       </View>
+      <Text style={styles.errorMessage}>{errorMessage}</Text>
       <View style={styles.forgotPasswordContainer}>
         <View style={styles.toggleContainer}>
           <ToggleButton size={0.5} />
@@ -339,5 +356,14 @@ const styles = StyleSheet.create({
   signInButtonLogo: {
     height: 18,
     width: 18,
+  },
+  errorMessage: {
+    fontSize: 10,
+    lineHeight: 10 * 1.4,
+    color: Colors.DEFAULT_RED,
+    // fontFamily: Fonts.POPPINS_MEDIUM,
+    marginHorizontal: 20,
+    marginTop: 3,
+    marginBottom: 10,
   },
 });

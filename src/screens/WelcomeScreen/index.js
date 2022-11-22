@@ -12,9 +12,10 @@ import General from "../../constants/General";
 import { WelcomeCard } from "../../components";
 import { Display } from "../../utils";
 import Separator from "../../components/Separator";
-// import Fonts from "../../constants/Fonts";
 import { StorageService } from "../../services";
-
+import { GeneralAction } from "../../Redux/Actions";
+// import Fonts from "../../constants/Fonts";
+import { useDispatch } from "react-redux";
 
 const pageStyle = (isActive) =>
   isActive
@@ -48,9 +49,11 @@ const WelcomeScreen = ({ navigation }) => {
     });
   };
 
+  const dispatch = useDispatch();
+
   const navigate = () => {
     StorageService.setFirstTimeUse().then(() => {
-      dispatchEvent(GeneralAction.setFirstTimeUse());
+      dispatch(GeneralAction.setIsFirstTimeUse());
     });
   };
 
@@ -84,8 +87,8 @@ const WelcomeScreen = ({ navigation }) => {
       {welcomeListIndex === 2 ? (
         <TouchableOpacity
           style={styles.gettingStartedButton}
-          //activeOpacity={0.8}
-          onPress={() => navigation.navigate("SignInScreen")}
+          activeOpacity={0.8}
+          onPress={() => navigate()}
         >
           <Text style={styles.gettingStartedButtonText}>Bắt đầu</Text>
         </TouchableOpacity>
