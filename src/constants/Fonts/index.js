@@ -1,11 +1,17 @@
 export default {
-  POPPINS_BLACK: 'Poppins-Black',
-  POPPINS_BOLD: 'Poppins-Bold',
-  POPPINS_EXTRA_BOLD: 'Poppins-ExtraBold',
-  POPPINS_EXTRA_LIGHT: 'Poppins-ExtraLight',
-  POPPINS_LIGHT: 'Poppins-Light',
-  POPPINS_MEDIUM: 'Poppins-Medium',
-  POPPINS_REGULAR: 'Poppins-Regular',
-  POPPINS_SEMI_BOLD: 'Poppins-SemiBold',
-  POPPINS_THIN: 'Poppins-Thin',
+  // POPPINS_BLACK: '../../assets/fonts/Poppins-Black.ttf',
+  // POPPINS_BOLD: '../../assets/fonts/Poppins-Bold.ttf',
+  // POPPINS_EXTRA_BOLD: '../../assets/fonts/Poppins-ExtraBold.ttf',
+  // POPPINS_EXTRA_LIGHT: '../../assets/fonts/Poppins-ExtraLight.ttf',
+  // POPPINS_LIGHT: '../../assets/fonts/Poppins-Light.ttf',
+  // POPPINS_MEDIUM: '../../assets/fonts/Poppins-Medium.ttf',
+  // POPPINS_REGULAR: '../../assets/fonts/Poppins-Regular.ttf',
+  // POPPINS_SEMI_BOLD: '../../assets/fonts/Poppins-SemiBold.ttf',
+  // POPPINS_THIN: '../../assets/fonts/Poppins-Thin.ttf',
+
+
+  
 };
+
+
+

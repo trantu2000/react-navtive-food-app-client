@@ -15,13 +15,13 @@ import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 import { Display } from "../../utils";
-import Images from "../../constants/Images";
-import ToggleButton from "../../components/ToggleButton";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Mock from "../../constants/Mock";
 import CategoryMenuItem from "../../components/CategoryMenuItem";
 import RestaurantCard from "../../components/RestaurantCard";
 import RestaurantMediumCard from "../../components/RestaurantMediumCard";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 const restaurants = [
   {
@@ -64,6 +64,13 @@ const HomeScreen = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState();
   // const [restaurants, setRestaurants] = useState(null);
   const [activeSortItem, setActiveSortItem] = useState("Gần đây");
+
+  let [fontsLoaded] = useFonts({
+    "Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
     <View style={styles.container}>
       <StatusBar
@@ -229,14 +236,14 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontFamily: 'Poppins-Medium',
   },
   selectedLocationText: {
     color: Colors.DEFAULT_YELLOW,
     marginLeft: 5,
     fontSize: 14,
     lineHeight: 14 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+   fontFamily: 'Poppins-Medium',
   },
   alertBadge: {
     backgroundColor: Colors.DEFAULT_YELLOW,
@@ -274,7 +281,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_GREY,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+   fontFamily: 'Poppins-Medium',
     marginLeft: 10,
   },
   categoriesContainer: {
@@ -301,13 +308,13 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+   fontFamily: 'Poppins-Medium',
   },
   listHeaderSubtitle: {
     color: Colors.DEFAULT_YELLOW,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+   fontFamily: 'Poppins-Medium',
   },
   sortListContainer: {
     flexDirection: "row",
@@ -329,6 +336,6 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontFamily: 'Poppins-Medium',
   },
 });

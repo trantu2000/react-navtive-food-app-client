@@ -1,5 +1,7 @@
 import axios from "axios";
 import ApiConstants from "../../constants/ApiConstants";
+import { getToken } from "../../Redux/Store";
+import { authHeader } from "../../utils/Generator";
 
 const AuthRequest = axios.create({
   baseURL: ApiConstants.BACKEND_API.BASE_API_URL,
@@ -60,4 +62,21 @@ const login = async (user) => {
   }
 };
 
-export default { register, checkUserExist, login };
+const refreshToken = async () => {
+  try {
+    let tokenResponse = await AuthRequest.post(
+      ApiConstants.BACKEND_API.REFRESH_TOKEN,
+      { headers: authHeader(getToken()) }
+    );
+    if (tokenResponse?.status === 200) {
+      return { status: true, data: tokenResponse?.data };
+    } else {
+      return { status: false };
+    }
+  } catch (error) {
+    console.log(error);
+    return { status: false, message: "Oops! Something went wrong" };
+  }
+};
+
+export default { register, checkUserExist, login, refreshToken };
