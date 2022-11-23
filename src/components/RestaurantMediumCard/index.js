@@ -4,12 +4,22 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Colors from "../../constants/Colors";
 import { Display } from "../../utils";
 import Images from "../../constants/Images";
+import { StaticImageService } from "../../services";
 
-const RestaurantMediumCard = ({ name, images }) => {
+const RestaurantMediumCard = ({
+  name,
+  images: { logo },
+  time,
+  distance,
+  tags,
+}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Image source={{ uri: images }} style={styles.posterStyle} />
+        <Image
+          source={{ uri: StaticImageService.getLogo(logo) }}
+          style={styles.posterStyle}
+        />
       </View>
       <View style={styles.labelContainer}>
         <View style={styles.titleContainer}>
@@ -20,7 +30,7 @@ const RestaurantMediumCard = ({ name, images }) => {
             <Text style={styles.reviewsText}>({233})</Text>
           </View>
         </View>
-        <Text style={styles.tagsText}>Bugger, pizza,chicken</Text>
+        <Text style={styles.tagsText}>{tags?.join(' • ')}</Text>
         <View style={styles.deliveryDetailsContainer}>
           <View style={styles.rowAndCenter}>
             <Image

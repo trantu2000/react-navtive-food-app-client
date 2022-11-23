@@ -4,23 +4,40 @@ import IonIcons from "react-native-vector-icons/Ionicons";
 import Colors from "../../constants/Colors";
 import Images from "../../constants/Images";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { StaticImageService } from "../../services";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
-const RestaurantCard = ({ name, images}) => {
+const RestaurantCard = ({
+  id,
+  name,
+  images: { poster },
+  tags,
+  distance,
+  time,
+  navigate,
+}) => {
+  let [fontsLoaded] = useFonts({
+    "Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
   return (
-    <TouchableOpacity
-      style={styles.container}
-      activeOpacity={0.8}
-      
-    >
+    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
       <IonIcons
         name="bookmark"
         color={Colors.DEFAULT_YELLOW}
         size={24}
         style={styles.bookmark}
       />
-      <Image source={{ uri: images }} style={styles.posterStyle} />
+      <Image
+        source={{ uri: StaticImageService.getPoster(poster) }}
+        style={styles.posterStyle}
+      />
       <Text style={styles.titleText}>{name}</Text>
-      <Text style={styles.tagText}>Bugger, chicken, pizza</Text>
+      <Text style={styles.tagText}>{tags?.join(" • ")}</Text>
       <View style={styles.footerContainer}>
         <View style={styles.rowAndCenter}>
           <FontAwesome name="star" color={Colors.DEFAULT_YELLOW} />
@@ -34,7 +51,7 @@ const RestaurantCard = ({ name, images}) => {
               color={Colors.DEFAULT_BLACK}
               size={15}
             />
-            <Text style={styles.timeAndDistanceText}>5000</Text>
+            <Text style={styles.timeAndDistanceText}>{distance}</Text>
           </View>
           <View style={styles.timeAndDistanceContainer}>
             <IonIcons
@@ -42,7 +59,7 @@ const RestaurantCard = ({ name, images}) => {
               color={Colors.DEFAULT_BLACK}
               size={15}
             />
-            <Text style={styles.timeAndDistanceText}>30</Text>
+            <Text style={styles.timeAndDistanceText}>{time}</Text>
           </View>
         </View>
       </View>
@@ -72,7 +89,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 15,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontFamily: "Poppins-Medium",
     color: Colors.DEFAULT_BLACK,
   },
   bookmark: {
@@ -85,7 +102,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 11,
     lineHeight: 11 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontFamily: "Poppins-Medium",
     color: Colors.DEFAULT_GREY,
     marginBottom: 5,
   },
@@ -112,20 +129,20 @@ const styles = StyleSheet.create({
   timeAndDistanceText: {
     fontSize: 10,
     lineHeight: 10 * 1.4,
-    // fontFamily: Fonts.POPPINS_BOLD,
+    fontFamily: "Poppins-Bold",
     color: Colors.DEFAULT_BLACK,
   },
   ratingText: {
     marginLeft: 5,
     fontSize: 10,
     lineHeight: 10 * 1.4,
-    // fontFamily: Fonts.POPPINS_BOLD,
+    fontFamily: "Poppins-Bold",
     color: Colors.DEFAULT_BLACK,
   },
   reviewsText: {
     fontSize: 10,
     lineHeight: 10 * 1.4,
-    // fontFamily: Fonts.POPPINS_BOLD,
+    fontFamily: "Poppins-Bold",
     color: Colors.DEFAULT_BLACK,
   },
 });

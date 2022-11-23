@@ -9,7 +9,7 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
@@ -22,38 +22,39 @@ import RestaurantCard from "../../components/RestaurantCard";
 import RestaurantMediumCard from "../../components/RestaurantMediumCard";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import { RestaurantService } from "../../services";
 
-const restaurants = [
-  {
-    id: "0",
-    name: "KiChi KiChi",
-    images:
-      "https://i2.wp.com/dinhhuong.vn/wp-content/uploads/2018/10/thiet-ke-thi-cong-nha-hang-lau-bang-chuyen-kichi-kichi-4.jpg?fit=1500%2C900",
-  },
-  {
-    id: "1",
-    name: "MC Donal",
-    images:
-      "https://global-uploads.webflow.com/60af8c708c6f35480d067652/61a2ea3a06fdbcd5b4f51079_screenshot_1638066729.png",
-  },
-  {
-    id: "2",
-    name: "KFC",
-    images: "http://kyluc.vn/Userfiles/Upload/images/239z22.jpg",
-  },
-  {
-    id: "3",
-    name: "Chicken Plus",
-    images:
-      "https://lh3.googleusercontent.com/p/AF1QipOtRHzgmjkmtuTd1MNyPIY1XOCyzqRTgrpMJavE=w1080-h608-p-no-v0",
-  },
-  {
-    id: "4",
-    name: "Texas",
-    images:
-      "https://oms.hotdeal.vn/images/editors/sources/000355061509/355061-355061-body%20(37).jpg",
-  },
-];
+// const restaurants = [
+//   {
+//     id: "0",
+//     name: "KiChi KiChi",
+//     images:
+//       "https://i2.wp.com/dinhhuong.vn/wp-content/uploads/2018/10/thiet-ke-thi-cong-nha-hang-lau-bang-chuyen-kichi-kichi-4.jpg?fit=1500%2C900",
+//   },
+//   {
+//     id: "1",
+//     name: "MC Donal",
+//     images:
+//       "https://global-uploads.webflow.com/60af8c708c6f35480d067652/61a2ea3a06fdbcd5b4f51079_screenshot_1638066729.png",
+//   },
+//   {
+//     id: "2",
+//     name: "KFC",
+//     images: "http://kyluc.vn/Userfiles/Upload/images/239z22.jpg",
+//   },
+//   {
+//     id: "3",
+//     name: "Chicken Plus",
+//     images:
+//       "https://lh3.googleusercontent.com/p/AF1QipOtRHzgmjkmtuTd1MNyPIY1XOCyzqRTgrpMJavE=w1080-h608-p-no-v0",
+//   },
+//   {
+//     id: "4",
+//     name: "Texas",
+//     images:
+//       "https://oms.hotdeal.vn/images/editors/sources/000355061509/355061-355061-body%20(37).jpg",
+//   },
+// ];
 
 const sortStyle = (isActive) =>
   isActive
@@ -62,7 +63,7 @@ const sortStyle = (isActive) =>
 
 const HomeScreen = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState();
-  // const [restaurants, setRestaurants] = useState(null);
+  const [restaurants, setRestaurants] = useState(null);
   const [activeSortItem, setActiveSortItem] = useState("Gần đây");
 
   let [fontsLoaded] = useFonts({
@@ -71,6 +72,25 @@ const HomeScreen = ({ navigation }) => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  // useEffect(() => {
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     RestaurantService.getRestaurants().then(response => {
+  //       if (response?.status) {
+  //         setRestaurant(response?.data);
+  //       }
+  //     });
+  //   });
+  //   return unsubscribe;
+  // }, []);
+
+  RestaurantService.getRestaurants().then((response) => {
+    if (response?.status) {
+      setRestaurants(response?.data);
+    }
+  });
+  //console.log(restaurants);
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -137,7 +157,7 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.listHeader}>
             <Text
               style={styles.listHeaderTitle}
-              onPress={() => navigation.navigate("RestaurantScreen")}
+              // onPress={() => navigation.navigate("RestaurantScreen")}
             >
               Xếp hạng hàng đầu
             </Text>
@@ -145,7 +165,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <FlatList
             data={restaurants}
-            keyExtractor={(item) => item?.id}
+            keyExtractor={item => item?.id}
             horizontal
             ListHeaderComponent={() => <Separator width={20} />}
             ListFooterComponent={() => <Separator width={20} />}
@@ -153,7 +173,7 @@ const HomeScreen = ({ navigation }) => {
               <RestaurantCard
                 {...item}
                 navigate={(restaurantId) =>
-                  navigation.navigate("Restaurant", { restaurantId })
+                  navigation.navigate("RestaurantScreen", { restaurantId })
                 }
               />
             )}
@@ -196,7 +216,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.sortListItemText}>Xu hướng</Text>
           </TouchableOpacity>
         </View>
-        {restaurants?.map((item) => (
+        {restaurants?.map(item => (
           <RestaurantMediumCard {...item} key={item?.id} />
         ))}
         <Separator height={Display.setHeight(5)} />
@@ -236,14 +256,14 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    fontFamily: 'Poppins-Medium',
+    fontFamily: "Poppins-Medium",
   },
   selectedLocationText: {
     color: Colors.DEFAULT_YELLOW,
     marginLeft: 5,
     fontSize: 14,
     lineHeight: 14 * 1.4,
-   fontFamily: 'Poppins-Medium',
+    fontFamily: "Poppins-Medium",
   },
   alertBadge: {
     backgroundColor: Colors.DEFAULT_YELLOW,
@@ -281,7 +301,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_GREY,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-   fontFamily: 'Poppins-Medium',
+    fontFamily: "Poppins-Medium",
     marginLeft: 10,
   },
   categoriesContainer: {
@@ -308,13 +328,13 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-   fontFamily: 'Poppins-Medium',
+    fontFamily: "Poppins-Medium",
   },
   listHeaderSubtitle: {
     color: Colors.DEFAULT_YELLOW,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-   fontFamily: 'Poppins-Medium',
+    fontFamily: "Poppins-Medium",
   },
   sortListContainer: {
     flexDirection: "row",
@@ -336,6 +356,6 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    fontFamily: 'Poppins-Medium',
+    fontFamily: "Poppins-Medium",
   },
 });
