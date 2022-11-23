@@ -25,7 +25,11 @@ const RestaurantCard = ({
     return <AppLoading />;
   }
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      onPress={() => navigate(id)}
+    >
       <IonIcons
         name="bookmark"
         color={Colors.DEFAULT_YELLOW}

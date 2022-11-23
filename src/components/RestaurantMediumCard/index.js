@@ -12,9 +12,10 @@ const RestaurantMediumCard = ({
   time,
   distance,
   tags,
+  navigation
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <View>
         <Image
           source={{ uri: StaticImageService.getLogo(logo) }}
@@ -22,7 +23,7 @@ const RestaurantMediumCard = ({
         />
       </View>
       <View style={styles.labelContainer}>
-        <View style={styles.titleContainer}>
+        <View style={styles.titleContainer} >
           <Text style={styles.titleText}>{name}</Text>
           <View style={styles.rowAndCenter}>
             <FontAwesome />

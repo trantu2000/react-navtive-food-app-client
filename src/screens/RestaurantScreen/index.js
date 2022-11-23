@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Images from "../../constants/Images";
 import { Display } from "../../utils";
@@ -16,178 +16,9 @@ import IonIcons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import CategoryListItem from "../../components/CategoryListItem";
 import FoodCart from "../../components/FoodCard";
+import { RestaurantService, StaticImageService } from "../../services";
+import ApiConstants from "../../constants/ApiConstants";
 
-const restaurants = [
-  {
-    id: "100",
-    name: "McDonalds",
-    type: "Take-Away",
-    tags: [
-      "burgers",
-      "chicken",
-      "coffee",
-      "tea",
-      "drinks",
-      "pizza",
-      "sesserts",
-      "chocolate",
-      "sundae",
-      "paneer",
-      "nuggets",
-    ],
-    location: "13A Street, New york",
-    distance: 5000,
-    time: 30,
-    images: {
-      logo: "mcdonalds",
-      poster: "mcdonalds",
-      cover: "burgers",
-    },
-    categories: ["Burgers & Wraps", "Snacks & sides", "Desserts", "Beverages"],
-  },
-  {
-    id: "101",
-    name: "Burger King",
-    type: "Dine-In",
-    tags: ["burgers", "chicken", "veg", "grilled", "fries"],
-    location: "15th Avenue, New york",
-    distance: 3900,
-    time: 25,
-    images: {
-      logo: "burgerking",
-      poster: "burgerking",
-      cover: "burgerking",
-    },
-    categories: ["Burgers", "Whopper", "Chicken Wings", "Sides"],
-  },
-  {
-    id: "102",
-    name: "Dominos Pizza",
-    type: "Dine-In",
-    tags: [
-      "pizza",
-      "chicken",
-      "barbeque",
-      "sausage",
-      "indian",
-      "veg",
-      "mexican",
-      "paneer",
-      "bread",
-    ],
-    location: "15th Avenue, New york",
-    distance: 6300,
-    time: 35,
-    images: {
-      logo: "dominos",
-      poster: "dominos",
-      cover: "dominospizza",
-    },
-    categories: [
-      "Non-Veg Pizza",
-      "Veg Pizza",
-      "Pizza Mania",
-      "Sides and Beverages",
-    ],
-  },
-  {
-    id: "103",
-    name: "Pizza Hut",
-    type: "Dine-In",
-    tags: ["Pizza", "American Foods", "Chicken", "Meat"],
-    location: "15th Avenue, New york",
-    distance: 5560,
-    time: 31,
-    images: {
-      logo: "pizzahut",
-      poster: "pizzahut",
-      cover: "pizzahut",
-    },
-    categories: ["Pizzas", "Sides", "Desserts", "Drinks"],
-  },
-  {
-    id: "104",
-    name: "Baskin Robins",
-    type: "Take-Away",
-    tags: ["Icecream", "American Foods", "Desserts"],
-    location: "15th Avenue, New york",
-    distance: 3400,
-    time: 21,
-    images: {
-      logo: "baskinrobbins",
-      poster: "baskinrobbins",
-      cover: "baskinrobbins",
-    },
-    categories: [
-      "Twin Combo Packs",
-      "Scoops",
-      "Icecream Cakes",
-      "Sundaes",
-      "Icecream Sandwich",
-      "Super-Duper Thick Shakes",
-    ],
-  },
-  {
-    id: "105",
-    name: "Starbucks",
-    type: "Cafe",
-    tags: ["Coffee", "American Foods", "Tea"],
-    location: "15th Avenue, New york",
-    distance: 6600,
-    time: 36,
-    images: {
-      logo: "starbucks",
-      poster: "starbucks",
-      cover: "starbucks",
-    },
-    categories: [
-      "Featured Drinks",
-      "Freshly Brewed Coffee",
-      "Crème Frappuccino®",
-      "Cold Brew",
-      "Espresso",
-      "Coffee Frappuccino®",
-      "Teavana® Tea",
-    ],
-  },
-  {
-    id: "106",
-    name: "Subway",
-    type: "Take-Away",
-    tags: ["American Foods", "Burger", "Sandwitch"],
-    location: "15th Avenue, New york",
-    distance: 4800,
-    time: 26,
-    images: {
-      logo: "subway",
-      poster: "subway",
-      cover: "subway",
-    },
-    categories: [
-      "Signature Wraps",
-      "All Sandwiches",
-      "Breakfast",
-      "Salads",
-      "Snacks",
-      "Sides & Drinks",
-    ],
-  },
-  {
-    id: "107",
-    name: "KFC",
-    type: "Dine-In",
-    tags: ["American Foods", "Chicken"],
-    location: "15th Avenue, New york",
-    distance: 2600,
-    time: 16,
-    images: {
-      logo: "kfc",
-      poster: "kfc",
-      cover: "kfc",
-    },
-    categories: ["Chicken", "Burgers", "Rice Bowls", "Snacks", "Beverages"],
-  },
-];
 const foods = [
   {
     id: "2000",
@@ -623,10 +454,21 @@ const ListFooter = () => (
   </View>
 );
 
-const RestaurantScreen = ({ navigation }) => {
-  const [selectedCategory, setSelectedCategory] = useState(
-    restaurants[0].categories[0]
-  );
+const RestaurantScreen = ({
+  navigation,
+  route: {
+    params: { restaurantId },
+  },
+}) => {
+  const [restaurant, setRestaurant] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  useEffect(() => {
+    RestaurantService.getOneRestaurantById(restaurantId).then((response) => {
+      setSelectedCategory(response?.data?.categories[0]);
+      setRestaurant(response?.data);
+    });
+  }, []);
   return (
     <View style={styles.container}>
       {/* <StatusBar barStyle="default" translucent backgroundColor="transparent" /> */}
@@ -645,7 +487,10 @@ const RestaurantScreen = ({ navigation }) => {
       </View>
       <Image
         source={{
-          uri: "https://phuongnamdigital.com/thumbh/360/uploads/tin-tuc/mcdonald.jpg",
+          uri: StaticImageService.getGalleryImage(
+            restaurant?.images?.cover,
+            ApiConstants.STATIC_IMAGE.SIZE.SQUARE
+          ),
         }}
         style={styles.backgroundImage}
       />
@@ -653,14 +498,14 @@ const RestaurantScreen = ({ navigation }) => {
         <Separator height={Display.setHeight(35)} />
         <View style={styles.mainContainer}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>McDonalds</Text>
+            <Text style={styles.title}>{restaurant?.name}</Text>
             <IonIcons
               name={"bookmark"}
               color={Colors.DEFAULT_YELLOW}
               size={24}
             />
           </View>
-          <Text style={styles.tagText}>bugger•pizza•chicken</Text>
+          <Text style={styles.tagText}>{restaurant?.tags?.join(" • ")}</Text>
           <View style={styles.ratingReviewsContainer}>
             <FontAwesome name="star" size={18} color={Colors.DEFAULT_YELLOW} />
             <Text style={styles.ratingText}>4.2</Text>
@@ -679,19 +524,24 @@ const RestaurantScreen = ({ navigation }) => {
                 style={styles.deliveryDetailIcon}
                 source={Images.DELIVERY_TIME}
               />
-              <Text style={styles.deliveryDetailText}>30 min</Text>
+              <Text style={styles.deliveryDetailText}>
+                {" "}
+                {restaurant?.time} min
+              </Text>
             </View>
             <View style={styles.rowAndCenter}>
               <Image style={styles.deliveryDetailIcon} source={Images.MARKER} />
-              <Text style={styles.deliveryDetailText}>5 km</Text>
+              <Text style={styles.deliveryDetailText}>
+                {restaurant?.distance / 1000} km
+              </Text>
             </View>
             <View style={styles.restaurantType}>
-              <Text style={styles.restaurantTypeText}>Giao đi</Text>
+              <Text style={styles.restaurantTypeText}> {restaurant?.type}</Text>
             </View>
           </View>
           <View style={styles.categoriesContainer}>
             <FlatList
-              data={restaurants}
+              data={restaurant?.categories}
               keyExtractor={(item) => item}
               horizontal
               ListHeaderComponent={() => <ListHeader />}
@@ -699,8 +549,8 @@ const RestaurantScreen = ({ navigation }) => {
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
                 <CategoryListItem
-                  name={item.categories[0]}
-                  isActive={item.categories[0] === selectedCategory}
+                  name={item}
+                  isActive={item === selectedCategory}
                   selectCategory={(category) => setSelectedCategory(category)}
                 />
               )}

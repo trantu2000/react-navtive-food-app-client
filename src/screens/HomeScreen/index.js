@@ -165,13 +165,14 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <FlatList
             data={restaurants}
-            keyExtractor={item => item?.id}
+            keyExtractor={(item) => item?.id}
             horizontal
             ListHeaderComponent={() => <Separator width={20} />}
             ListFooterComponent={() => <Separator width={20} />}
             renderItem={({ item }) => (
               <RestaurantCard
                 {...item}
+                
                 navigate={(restaurantId) =>
                   navigation.navigate("RestaurantScreen", { restaurantId })
                 }
@@ -216,7 +217,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.sortListItemText}>Xu hướng</Text>
           </TouchableOpacity>
         </View>
-        {restaurants?.map(item => (
+        {restaurants?.map((item) => (
           <RestaurantMediumCard {...item} key={item?.id} />
         ))}
         <Separator height={Display.setHeight(5)} />
