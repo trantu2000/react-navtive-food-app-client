@@ -3,15 +3,20 @@ import React from "react";
 import Colors from "../../constants/Colors";
 import { Display } from "../../utils";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import ApiConstants from "../../constants/ApiConstants";
+import { StaticImageService } from "../../services";
 
 const FoodCart = ({ id, name, description, price, image, navigate }) => {
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate()} activeOpacity={0.8}>
         <Image
           style={styles.image}
           source={{
-            uri: "https://yummyday.vn/uploads/images/banh-hamburger-10.jpg",
+            uri: StaticImageService.getGalleryImage(
+              image,
+              ApiConstants.STATIC_IMAGE.SIZE.SQUARE
+            ),
           }}
         />
       </TouchableOpacity>

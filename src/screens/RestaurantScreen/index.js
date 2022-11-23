@@ -472,12 +472,13 @@ const RestaurantScreen = ({
   return (
     <View style={styles.container}>
       {/* <StatusBar barStyle="default" translucent backgroundColor="transparent" /> */}
-      <StatusBar
+      {/* <StatusBar
         barStyle="dark-content"
         backgroundColor={Colors.DEFAULT_WHITE}
         translucent
-      />
-      <Separator height={StatusBar.currentHeight} />
+      /> */}
+      <StatusBar barStyle="default" translucent backgroundColor="transparent" />
+      {/* <Separator height={StatusBar.currentHeight} /> */}
       <View style={styles.headerContainer}>
         <IonIcons
           name="chevron-back-outline"

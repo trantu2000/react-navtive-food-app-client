@@ -21,7 +21,12 @@ const setStyle = (isActive) =>
     ? styles.subMenuButtonText
     : { ...styles.subMenuButtonText, color: Colors.DEFAULT_GREY };
 
-const FoodScreen = ({ navigation }) => {
+const FoodScreen = ({
+  navigation,
+  route: {
+    params: { foodId },
+  },
+}) => {
   const [selectedSubMenu, setSelectedSubMenu] = useState("Details");
   return (
     <View style={styles.container}>
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 30,
-    zIndex:10
+    zIndex: 10,
   },
   image: {
     position: "absolute",
@@ -247,22 +252,22 @@ const styles = StyleSheet.create({
     textAlign: "justify",
   },
   buttonsContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: Display.setWidth(5),
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     backgroundColor: Colors.DEFAULT_WHITE,
     width: Display.setWidth(100),
     paddingVertical: Display.setWidth(2.5),
   },
   itemAddContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: Colors.LIGHT_GREY2,
     height: Display.setHeight(6),
     width: Display.setWidth(30),
-    justifyContent: 'center',
+    justifyContent: "center",
     borderRadius: 8,
   },
   itemCountText: {
@@ -276,8 +281,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DEFAULT_GREEN,
     height: Display.setHeight(6),
     width: Display.setWidth(58),
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 8,
   },
   cartButtonText: {

@@ -7,15 +7,16 @@ import Images from "../../constants/Images";
 import { StaticImageService } from "../../services";
 
 const RestaurantMediumCard = ({
+  id,
   name,
   images: { logo },
   time,
   distance,
   tags,
-  navigation
+  navigate
 }) => {
   return (
-    <View style={styles.container} >
+    <View style={styles.container}  >
       <View>
         <Image
           source={{ uri: StaticImageService.getLogo(logo) }}
@@ -24,7 +25,7 @@ const RestaurantMediumCard = ({
       </View>
       <View style={styles.labelContainer}>
         <View style={styles.titleContainer} >
-          <Text style={styles.titleText}>{name}</Text>
+          <Text style={styles.titleText} onPress={() => navigate(id)}>{name}</Text>
           <View style={styles.rowAndCenter}>
             <FontAwesome />
             <Text style={styles.ratingText}>4.2</Text>
