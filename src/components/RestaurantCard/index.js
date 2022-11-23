@@ -5,8 +5,7 @@ import Colors from "../../constants/Colors";
 import Images from "../../constants/Images";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StaticImageService } from "../../services";
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
+
 
 const RestaurantCard = ({
   id,
@@ -17,13 +16,7 @@ const RestaurantCard = ({
   time,
   navigate,
 }) => {
-  let [fontsLoaded] = useFonts({
-    "Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
-    "Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -93,7 +86,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 15,
     lineHeight: 13 * 1.4,
-    fontFamily: "Poppins-Medium",
+    // fontFamily: "Poppins-Medium",
     color: Colors.DEFAULT_BLACK,
   },
   bookmark: {
@@ -106,7 +99,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 11,
     lineHeight: 11 * 1.4,
-    fontFamily: "Poppins-Medium",
+    // fontFamily: "Poppins-Medium",
     color: Colors.DEFAULT_GREY,
     marginBottom: 5,
   },
@@ -133,20 +126,20 @@ const styles = StyleSheet.create({
   timeAndDistanceText: {
     fontSize: 10,
     lineHeight: 10 * 1.4,
-    fontFamily: "Poppins-Bold",
+    // fontFamily: "Poppins-Bold",
     color: Colors.DEFAULT_BLACK,
   },
   ratingText: {
     marginLeft: 5,
     fontSize: 10,
     lineHeight: 10 * 1.4,
-    fontFamily: "Poppins-Bold",
+    // fontFamily: "Poppins-Bold",
     color: Colors.DEFAULT_BLACK,
   },
   reviewsText: {
     fontSize: 10,
     lineHeight: 10 * 1.4,
-    fontFamily: "Poppins-Bold",
+    // fontFamily: "Poppins-Bold",
     color: Colors.DEFAULT_BLACK,
   },
 });

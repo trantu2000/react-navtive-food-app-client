@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Colors from "../../constants/Colors";
@@ -13,48 +13,50 @@ const RestaurantMediumCard = ({
   time,
   distance,
   tags,
-  navigate
+  navigate,
 }) => {
   return (
-    <View style={styles.container}  >
-      <View>
-        <Image
-          source={{ uri: StaticImageService.getLogo(logo) }}
-          style={styles.posterStyle}
-        />
-      </View>
-      <View style={styles.labelContainer}>
-        <View style={styles.titleContainer} >
-          <Text style={styles.titleText} onPress={() => navigate(id)}>{name}</Text>
-          <View style={styles.rowAndCenter}>
-            <FontAwesome />
-            <Text style={styles.ratingText}>4.2</Text>
-            <Text style={styles.reviewsText}>({233})</Text>
+    <TouchableOpacity onPress={() => navigate(id)}>
+      <View style={styles.container}>
+        <View>
+          <Image
+            source={{ uri: StaticImageService.getLogo(logo) }}
+            style={styles.posterStyle}
+          />
+        </View>
+        <View style={styles.labelContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleText}>{name}</Text>
+            <View style={styles.rowAndCenter}>
+              <FontAwesome />
+              <Text style={styles.ratingText}>4.2</Text>
+              <Text style={styles.reviewsText}>({233})</Text>
+            </View>
+          </View>
+          <Text style={styles.tagsText}>{tags?.join(" • ")}</Text>
+          <View style={styles.deliveryDetailsContainer}>
+            <View style={styles.rowAndCenter}>
+              <Image
+                source={Images.DELIVERY_CHARGE}
+                style={styles.deliveryDetailsIcon}
+              />
+              <Text style={styles.deliveryDetailsText}>Miễn phí giao hàng</Text>
+            </View>
+            <View style={styles.rowAndCenter}>
+              <Image
+                source={Images.DELIVERY_TIME}
+                style={styles.deliveryDetailsIcon}
+              />
+              <Text style={styles.deliveryDetailsText}>30 phút</Text>
+            </View>
+            <View style={styles.rowAndCenter}>
+              <Image style={styles.deliveryDetailsIcon} />
+              <Text style={styles.deliveryDetailsText}>5000</Text>
+            </View>
           </View>
         </View>
-        <Text style={styles.tagsText}>{tags?.join(' • ')}</Text>
-        <View style={styles.deliveryDetailsContainer}>
-          <View style={styles.rowAndCenter}>
-            <Image
-              source={Images.DELIVERY_CHARGE}
-              style={styles.deliveryDetailsIcon}
-            />
-            <Text style={styles.deliveryDetailsText}>Miễn phí giao hàng</Text>
-          </View>
-          <View style={styles.rowAndCenter}>
-            <Image
-              source={Images.DELIVERY_TIME}
-              style={styles.deliveryDetailsIcon}
-            />
-            <Text style={styles.deliveryDetailsText}>30 phút</Text>
-          </View>
-          <View style={styles.rowAndCenter}>
-            <Image style={styles.deliveryDetailsIcon} />
-            <Text style={styles.deliveryDetailsText}>5000</Text>
-          </View>
-        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
