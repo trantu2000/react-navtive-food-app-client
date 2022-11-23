@@ -23,6 +23,7 @@ const BACKEND_API = {
   USER: "/user",
   REFRESH_TOKEN: "/refresh-token",
   RESTAURANT: "/restaurant",
+  FOOD: '/food',
 };
 
 export default { COUNTRY_FLAG, BACKEND_API ,STATIC_IMAGE};

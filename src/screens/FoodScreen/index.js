@@ -7,7 +7,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
 import Colors from "../../constants/Colors";
@@ -15,6 +15,8 @@ import { Display } from "../../utils";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Images from "../../constants/Images";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import ApiConstants from "../../constants/ApiConstants";
+import { FoodService, StaticImageService } from "../../services";
 
 const setStyle = (isActive) =>
   isActive
@@ -28,6 +30,15 @@ const FoodScreen = ({
   },
 }) => {
   const [selectedSubMenu, setSelectedSubMenu] = useState("Details");
+  const [food, setFood] = useState(null);
+
+  useEffect(() => {
+    FoodService.getOneFoodById(foodId).then((response) => {
+      console.log(response?.data);
+      setFood(response?.data);
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -45,7 +56,10 @@ const FoodScreen = ({
       </View>
       <Image
         source={{
-          uri: "https://yummyday.vn/uploads/images/banh-hamburger-10.jpg",
+          uri: StaticImageService.getGalleryImage(
+            food?.image,
+            ApiConstants.STATIC_IMAGE.SIZE.SQUARE
+          ),
         }}
         style={styles.image}
       />
@@ -53,8 +67,8 @@ const FoodScreen = ({
         <Separator height={Display.setWidth(100)} />
         <View style={styles.mainContainer}>
           <View style={styles.titleHeaderContainer}>
-            <Text style={styles.titleText}>hamburger</Text>
-            <Text style={styles.priceText}>80.000 đ</Text>
+            <Text style={styles.titleText}>{food?.name}</Text>
+            <Text style={styles.priceText}> {food?.price} đ</Text>
           </View>
           <View style={styles.subHeaderContainer}>
             <View style={styles.rowAndCenter}>
@@ -95,11 +109,18 @@ const FoodScreen = ({
             </TouchableOpacity>
           </View>
           <View style={styles.detailsContainer}>
-            <Text style={styles.detailHeader}>Description</Text>
-            <Text style={styles.detailContent}>ghfghfghf</Text>
-
-            <Text style={styles.detailHeader}>Ingredients</Text>
-            <Text style={styles.detailContent}>dgfgdfgd</Text>
+            {food?.description ? (
+              <>
+                <Text style={styles.detailHeader}>Description</Text>
+                <Text style={styles.detailContent}>{food?.description}</Text>
+              </>
+            ) : null}
+            {food?.ingredients ? (
+              <>
+                <Text style={styles.detailHeader}>Ingredients</Text>
+                <Text style={styles.detailContent}>{food?.ingredients}</Text>
+              </>
+            ) : null}
           </View>
         </View>
       </ScrollView>
