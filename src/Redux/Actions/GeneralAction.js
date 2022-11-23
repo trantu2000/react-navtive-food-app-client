@@ -29,6 +29,13 @@ const setIsFirstTimeUse = () => {
   };
 };
 
+const setUserData = userData => {
+  return {
+    type: types.SET_USER_DATA,
+    payload: userData,
+  };
+};
+
 const appStart = () => {
   return (dispatch, getState) => {
     StorageService.getFirstTimeUse().then((isFirstTimeUse) => {
@@ -101,5 +108,6 @@ export default {
   setToken,
   setIsFirstTimeUse,
   appStart,
+  setUserData,
   types,
 };

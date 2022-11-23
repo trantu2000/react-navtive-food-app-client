@@ -24,6 +24,7 @@ const BACKEND_API = {
   REFRESH_TOKEN: "/refresh-token",
   RESTAURANT: "/restaurant",
   FOOD: '/food',
+  CART: '/cart',
 };
 
 export default { COUNTRY_FLAG, BACKEND_API ,STATIC_IMAGE};

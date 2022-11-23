@@ -5,8 +5,20 @@ import { Display } from "../../utils";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ApiConstants from "../../constants/ApiConstants";
 import { StaticImageService } from "../../services";
+import { useDispatch, useSelector } from "react-redux";
+import CartAction from "../../Redux/Actions/CartAction";
 
 const FoodCart = ({ id, name, description, price, image, navigate }) => {
+  const dispatch = useDispatch();
+  const itemCount = useSelector(
+    (state) =>
+      state?.cartState?.cart?.cartItems?.find((item) => item?.foodId === id)
+        ?.count
+  );
+
+  const addToCart = (foodId) => dispatch(CartAction.addToCart({ foodId }));
+  const removeFromCart = (foodId) =>
+    dispatch(CartAction.removeFromCart({ foodId }));
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate()} activeOpacity={0.8}>
@@ -32,18 +44,23 @@ const FoodCart = ({ id, name, description, price, image, navigate }) => {
         <View style={styles.footerContainer}>
           <Text style={styles.priceText}>{price} 000đ</Text>
           <View style={styles.itemAddContainer}>
-            <AntDesign
-              name="minus"
-              color={Colors.DEFAULT_YELLOW}
-              size={18}
-              // onPress={() => removeFromCart(id)}
-            />
-            <Text style={styles.itemCountText}>0</Text>
+            {itemCount > 0 ? (
+              <>
+                <AntDesign
+                  name="minus"
+                  color={Colors.DEFAULT_YELLOW}
+                  size={18}
+                  onPress={() => removeFromCart(id)}
+                />
+                <Text style={styles.itemCountText}>{itemCount}</Text>
+              </>
+            ) : null}
+
             <AntDesign
               name="plus"
               color={Colors.DEFAULT_YELLOW}
               size={18}
-              //   onPress={() => addToCart(id)}
+              onPress={() => addToCart(id)}
             />
           </View>
         </View>

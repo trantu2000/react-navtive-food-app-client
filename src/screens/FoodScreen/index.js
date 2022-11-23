@@ -17,6 +17,8 @@ import Images from "../../constants/Images";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ApiConstants from "../../constants/ApiConstants";
 import { FoodService, StaticImageService } from "../../services";
+import { useDispatch, useSelector } from "react-redux";
+import CartAction from "../../Redux/Actions/CartAction";
 
 const setStyle = (isActive) =>
   isActive
@@ -31,6 +33,7 @@ const FoodScreen = ({
 }) => {
   const [selectedSubMenu, setSelectedSubMenu] = useState("Details");
   const [food, setFood] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     FoodService.getOneFoodById(foodId).then((response) => {
@@ -38,6 +41,16 @@ const FoodScreen = ({
       setFood(response?.data);
     });
   }, []);
+
+  const itemCount = useSelector(
+    (state) =>
+      state?.cartState?.cart?.cartItems?.find((item) => item?.foodId === foodId)
+        ?.count
+  );
+
+  const addToCart = (foodId) => dispatch(CartAction.addToCart({ foodId }));
+  const removeFromCart = (foodId) =>
+    dispatch(CartAction.removeFromCart({ foodId }));
 
   return (
     <View style={styles.container}>
@@ -125,19 +138,20 @@ const FoodScreen = ({
         </View>
       </ScrollView>
       <View style={styles.buttonsContainer}>
+       
         <View style={styles.itemAddContainer}>
           <AntDesign
             name="minus"
             color={Colors.DEFAULT_YELLOW}
             size={18}
-            // onPress={() => removeFromCart(foodId)}
+            onPress={() => removeFromCart(foodId)}
           />
-          <Text style={styles.itemCountText}>1</Text>
+          <Text style={styles.itemCountText}>{itemCount ? itemCount : 0}</Text>
           <AntDesign
             name="plus"
             color={Colors.DEFAULT_YELLOW}
             size={18}
-            // onPress={() => addToCart(foodId)}
+            onPress={() => addToCart(foodId)}
           />
         </View>
         <TouchableOpacity

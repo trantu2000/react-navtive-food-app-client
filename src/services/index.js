@@ -3,6 +3,7 @@ import StaticImageService from "./StaticImageService";
 import AuthenticationService from "./AuthenticationService";
 import RestaurantService from "./RestaurantService";
 import FoodService from "./FoodService";
+import CartService from "./CartService";
 
 export {
   StorageService,
@@ -10,4 +11,5 @@ export {
   AuthenticationService,
   RestaurantService,
   FoodService,
+  CartService
 };

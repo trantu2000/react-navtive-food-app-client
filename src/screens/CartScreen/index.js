@@ -18,7 +18,7 @@ import Images from "../../constants/Images";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const CartScreen = ({navigation}) => {
-  const [cart, setCart] = useState(0);
+  const [cart, setCart] = useState(3);
   return (
     <View style={styles.container}>
       <StatusBar
