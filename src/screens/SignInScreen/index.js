@@ -57,11 +57,11 @@ const SignInScreen = ({ navigation }) => {
       />
       <Separator height={StatusBar.currentHeight} />
       <View style={styles.headerContainer}>
-        <IonIcons
+        {/* <IonIcons
           name="chevron-back-outline"
           size={30}
           onPress={() => navigation.goBack()}
-        />
+        /> */}
         <Text style={styles.headerTitle}>Đăng nhập</Text>
       </View>
       <Text style={styles.title}>Xin chào,</Text>
@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
     textAlign: "center",
+    marginLeft:30
   },
   title: {
     fontSize: 20,
