@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
@@ -15,12 +15,14 @@ import Images from "../../constants/Images";
 import { Display } from "../../utils";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ToggleButton from "../../components/ToggleButton";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 import { StorageService } from "../../services";
 import { GeneralAction } from "../../Redux/Actions";
+import UserService from "../../services/UserService";
 
-const AccountScreen = ({navigation}) => {
+const AccountScreen = ({ navigation }) => {
   const dispatch = useDispatch();
+  const [user, setUser] = useState(null);
 
   const logout = () => {
     StorageService.setToken("").then(() => {
@@ -28,6 +30,15 @@ const AccountScreen = ({navigation}) => {
       dispatch(GeneralAction.setUserData(null));
     });
   };
+
+  useEffect(() => {
+    UserService.getUserData().then((response) => {
+      if (response?.status) {
+        setUser(response?.data);
+      }
+    });
+  }, []);
+ 
   return (
     <View style={styles.container}>
       <StatusBar
@@ -57,8 +68,8 @@ const AccountScreen = ({navigation}) => {
           <Image style={styles.profileImage} source={Images.AVATAR} />
         </View>
         <View style={styles.profileTextContainer}>
-          <Text style={styles.nameText}>Trần Thanh Tú</Text>
-          <Text style={styles.emailText}>tttuab@gmail.com</Text>
+          <Text style={styles.nameText}>{user?.data.username}</Text>
+          <Text style={styles.emailText}>{user?.data.email}</Text>
         </View>
       </View>
       <View style={styles.menuContainer}>

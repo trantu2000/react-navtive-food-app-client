@@ -1,25 +1,37 @@
-import React from 'react';
-import {View, Text, StyleSheet, StatusBar, FlatList} from 'react-native';
-import IonIcons from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
-import BookmarkCard from '../../components/BookmarkCard';
-import Separator from '../../components/Separator';
-import Colors from '../../constants/Colors';
-import { Display } from '../../utils';
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, StatusBar, FlatList } from "react-native";
+import IonIcons from "react-native-vector-icons/Ionicons";
+import { useSelector } from "react-redux";
+import BookmarkCard from "../../components/BookmarkCard";
+import Separator from "../../components/Separator";
+import Colors from "../../constants/Colors";
+import { BookmarkService } from "../../services";
+import { Display } from "../../utils";
 
 const ListItemSeparator = () => (
   <View
     style={{
       height: 0.8,
       backgroundColor: Colors.DEFAULT_GREY,
-      width: '100%',
+      width: "100%",
       marginVertical: 10,
     }}
   />
 );
 
-const BookmarkScreen = ({navigation}) => {
-  const bookmarks = useSelector(state => state?.bookmarkState?.bookmarks);
+const BookmarkScreen = ({ navigation }) => {
+  // const bookmarks = useSelector(state => state?.bookmarkState?.bookmarks);
+
+  const [bookmarks, setBookmarks] = useState(null);
+
+  useEffect(() => {
+    BookmarkService.getBookmarks().then((response) => {
+      if (response?.status) {
+        setBookmarks(response?.data);
+      }
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -39,16 +51,16 @@ const BookmarkScreen = ({navigation}) => {
       <FlatList
         style={styles.bookmarkList}
         data={bookmarks}
-        keyExtractor={item => item?.restaurantId}
+        keyExtractor={(item) => item?.restaurantId}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => <Separator height={10} />}
         ListFooterComponent={() => <Separator height={10} />}
         ItemSeparatorComponent={() => <ListItemSeparator />}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <BookmarkCard
             {...item?.restaurant}
-            navigate={restaurantId =>
-              navigation.navigate('RestaurantScreen', {restaurantId})
+            navigate={(restaurantId) =>
+              navigation.navigate("RestaurantScreen", { restaurantId })
             }
           />
         )}
@@ -63,8 +75,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DEFAULT_WHITE,
   },
   headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
@@ -73,7 +85,7 @@ const styles = StyleSheet.create({
     // fontFamily: Fonts.POPPINS_MEDIUM,
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
-    textAlign: 'center',
+    textAlign: "center",
   },
   bookmarkList: {
     marginHorizontal: 20,

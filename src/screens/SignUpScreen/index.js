@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import Colors from "../../constants/Colors";
@@ -74,6 +75,16 @@ const SignInScreen = ({ navigation }) => {
   const [emailState, setEmailState] = useState("default");
   const [usernameState, setUsernameState] = useState("default");
 
+  const createTwoButtonAlert = () =>
+    Alert.alert("Đăng ký", "thành công", [
+      {
+        text: "Đóng",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+      // { text: "OK", onPress: () => console.log("OK Pressed") },
+    ]);
+
   const register = () => {
     let user = {
       username,
@@ -86,6 +97,9 @@ const SignInScreen = ({ navigation }) => {
       // console.log(response);
       if (!response?.status) {
         setErrorMessage(response?.message);
+      }
+      if (response?.status) {
+        createTwoButtonAlert();
       }
     });
   };

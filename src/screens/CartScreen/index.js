@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
@@ -15,13 +15,22 @@ import { Display } from "../../utils";
 import Entypo from "react-native-vector-icons/Entypo";
 import Images from "../../constants/Images";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { useSelector } from "react-redux";
 import FoodCart from "../../components/FoodCard";
+import { CartService } from "../../services";
 
 const CartScreen = ({ navigation }) => {
-  const cart = useSelector((state) => state?.cartState?.cart);
 
-  // console.log(cart);
+  const [cart,setCart] = useState(null)
+
+  useEffect(() => {
+    CartService.getCartItems().then((response) => {
+      if (response?.status) {
+        setCart(response?.data);
+      }
+    });
+  }, []);
+
+//  console.log(cart);
   return (
     <View style={styles.container}>
       <StatusBar
@@ -92,7 +101,7 @@ const CartScreen = ({ navigation }) => {
                   color={Colors.DEFAULT_WHITE}
                   size={20}
                 />
-                <Text style={styles.checkoutText}>Thanh toán</Text>
+                <Text style={styles.checkoutText}>Đặt hàng</Text>
               </View>
               <Text style={styles.checkoutText}>{cart?.metaData?.grandTotal?.toFixed(2)} đ</Text>
             </TouchableOpacity>
