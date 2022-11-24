@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Colors from "../../constants/Colors";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
@@ -15,22 +15,13 @@ import { Display } from "../../utils";
 import Entypo from "react-native-vector-icons/Entypo";
 import Images from "../../constants/Images";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { useSelector } from "react-redux";
 import FoodCart from "../../components/FoodCard";
-import { CartService } from "../../services";
 
 const CartScreen = ({ navigation }) => {
+  const cart = useSelector((state) => state?.cartState?.cart);
 
-  const [cart,setCart] = useState(null)
-
-  useEffect(() => {
-    CartService.getCartItems().then((response) => {
-      if (response?.status) {
-        setCart(response?.data);
-      }
-    });
-  }, []);
-
-//  console.log(cart);
+  // console.log(cart);
   return (
     <View style={styles.container}>
       <StatusBar

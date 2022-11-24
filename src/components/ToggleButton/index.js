@@ -1,9 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, Animated } from "react-native";
-import React, { useState } from "react";
-import Colors from "../../constants/Colors";
+import React, {useState} from 'react';
+import {TouchableOpacity, Animated, StyleSheet, Easing} from 'react-native';
+import Colors from '../../constants/Colors';
+
 
 const containerStyle = (size, isActive) => ({
-  backgroundColor: !isActive ? Colors.DEFAULT_GREEN : Colors.DEFAULT_GREY,
+  backgroundColor: isActive ? Colors.DEFAULT_GREEN : Colors.DEFAULT_GREY,
   height: 32 * size,
   width: 64 * size,
   borderRadius: 32,
@@ -21,7 +22,8 @@ const toggleStyle = (size, animatedValue) => ({
     },
   ],
 });
-const ToggleButton = ({ size }) => {
+
+const ToggleButton = ({size}) => {
   const [isActive, setIsActive] = useState(false);
   const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
 
@@ -35,17 +37,15 @@ const ToggleButton = ({ size }) => {
     }).start();
     setIsActive(!isActive);
   };
+
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
       style={containerStyle(size, isActive)}
       onPress={() => toggleHandle()}
-    >
+      activeOpacity={0.8}>
       <Animated.View style={toggleStyle(size, animatedValue)} />
     </TouchableOpacity>
   );
 };
 
 export default ToggleButton;
-
-
