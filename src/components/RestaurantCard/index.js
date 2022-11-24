@@ -5,7 +5,8 @@ import Colors from "../../constants/Colors";
 import Images from "../../constants/Images";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StaticImageService } from "../../services";
-
+import { useDispatch, useSelector } from "react-redux";
+import BookmarkAction from "../../Redux/Actions/BookmarkAction";
 
 const RestaurantCard = ({
   id,
@@ -16,6 +17,17 @@ const RestaurantCard = ({
   time,
   navigate,
 }) => {
+  const dispatch = useDispatch();
+  const isBookmarked = useSelector(
+    (state) =>
+      state?.bookmarkState?.bookmarks?.filter(
+        (item) => item?.restaurantId === id
+      )?.length > 0
+  );
+  const addBookmark = () =>
+    dispatch(BookmarkAction.addBookmark({ restaurantId: id }));
+  const removeBookmark = () =>
+    dispatch(BookmarkAction.removeBookmark({ restaurantId: id }));
 
   return (
     <TouchableOpacity
@@ -24,10 +36,11 @@ const RestaurantCard = ({
       onPress={() => navigate(id)}
     >
       <IonIcons
-        name="bookmark"
+        name={isBookmarked ? "bookmark" : "bookmark-outline"}
         color={Colors.DEFAULT_YELLOW}
         size={24}
         style={styles.bookmark}
+        onPress={() => (isBookmarked ? removeBookmark() : addBookmark())}
       />
       <Image
         source={{ uri: StaticImageService.getPoster(poster) }}
@@ -93,7 +106,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 10,
     right: 10,
-    zIndex: 10,
+    zIndex: 100,
   },
   tagText: {
     marginLeft: 10,

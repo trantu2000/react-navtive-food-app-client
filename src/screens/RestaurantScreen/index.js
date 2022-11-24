@@ -18,6 +18,8 @@ import CategoryListItem from "../../components/CategoryListItem";
 import FoodCart from "../../components/FoodCard";
 import { RestaurantService, StaticImageService } from "../../services";
 import ApiConstants from "../../constants/ApiConstants";
+import {useDispatch, useSelector} from 'react-redux';
+import BookmarkAction from "../../Redux/Actions/BookmarkAction";
 
 const foods = [
   {
@@ -462,6 +464,7 @@ const RestaurantScreen = ({
 }) => {
   const [restaurant, setRestaurant] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  
 
   useEffect(() => {
     RestaurantService.getOneRestaurantById(restaurantId).then((response) => {
@@ -469,6 +472,19 @@ const RestaurantScreen = ({
       setRestaurant(response?.data);
     });
   }, []);
+
+  const dispatch = useDispatch();
+  const isBookmarked = useSelector(
+    (state) =>
+      state?.bookmarkState?.bookmarks?.filter(
+        (item) => item?.restaurantId === restaurantId
+      )?.length > 0
+  );
+  const addBookmark = () =>
+    dispatch(BookmarkAction.addBookmark({ restaurantId }));
+  const removeBookmark = () =>
+    dispatch(BookmarkAction.removeBookmark({ restaurantId }));
+
   return (
     <View style={styles.container}>
       {/* <StatusBar barStyle="default" translucent backgroundColor="transparent" /> */}
@@ -501,9 +517,10 @@ const RestaurantScreen = ({
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{restaurant?.name}</Text>
             <IonIcons
-              name={"bookmark"}
+              name={isBookmarked ? "bookmark" : "bookmark-outline"}
               color={Colors.DEFAULT_YELLOW}
               size={24}
+              onPress={() => (isBookmarked ? removeBookmark() : addBookmark())}
             />
           </View>
           <Text style={styles.tagText}>{restaurant?.tags?.join(" • ")}</Text>

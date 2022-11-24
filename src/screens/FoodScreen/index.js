@@ -135,6 +135,7 @@ const FoodScreen = ({
               </>
             ) : null}
           </View>
+          
         </View>
       </ScrollView>
       <View style={styles.buttonsContainer}>
