@@ -17,4 +17,5 @@ export default {
   DELIVERY_CHARGE: require('../../assets/images/delivery_charge.png'),
   EMPTY_CART: require('../../assets/images/empty_cart.png'),
   LOADING: require('../../assets/images/loading.json'),
+  AVATAR: require('../../assets/images/user_avatar.png'),
 };
