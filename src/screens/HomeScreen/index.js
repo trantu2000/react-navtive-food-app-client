@@ -219,14 +219,14 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: "Poppins-Medium",
+    fontWeight:'600',
   },
   selectedLocationText: {
     color: Colors.DEFAULT_YELLOW,
     marginLeft: 5,
     fontSize: 14,
     lineHeight: 14 * 1.4,
-    // fontFamily: "Poppins-Medium",
+    fontWeight:'600',
   },
   alertBadge: {
     backgroundColor: Colors.DEFAULT_YELLOW,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_GREY,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-    // fontFamily: "Poppins-Medium",
+    fontWeight:'600',
     marginLeft: 10,
   },
   categoriesContainer: {
@@ -291,13 +291,13 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-    // fontFamily: "Poppins-Medium",
+    fontWeight:'600'
   },
   listHeaderSubtitle: {
     color: Colors.DEFAULT_YELLOW,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: "Poppins-Medium",
+    fontWeight:'600',
   },
   sortListContainer: {
     flexDirection: "row",
@@ -319,6 +319,6 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: "Poppins-Medium",
+    fontWeight:'600',
   },
 });

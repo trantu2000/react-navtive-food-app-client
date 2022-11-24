@@ -157,14 +157,14 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
     textAlign: "center",
   },
   title: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     marginTop: 10,
     marginBottom: 50,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 14 * 1.4,
     color: Colors.DEFAULT_BLACK,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
   },
   phoneInputContainer: {
     backgroundColor: Colors.LIGHT_GREY,
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 18 * 1.4,
     color: Colors.DEFAULT_WHITE,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
   },
   countryDropdown: {
     backgroundColor: Colors.LIGHT_GREY,

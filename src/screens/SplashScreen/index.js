@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 32,
     color: Colors.DEFAULT_WHITE,
-    // fontFamily:Fonts.POPPINS_LIGHT
+    fontWeight:'600'
   },
 });

@@ -203,13 +203,13 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 23,
     lineHeight: 23 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
   },
   priceText: {
     fontSize: 23,
     lineHeight: 23 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_YELLOW,
   },
   subHeaderContainer: {
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
   subMenuButtonText: {
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
   },
   detailsContainer: {
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   detailHeader: {
     fontSize: 15,
     lineHeight: 15 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
     marginTop: 10,
     marginBottom: 2,
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   detailContent: {
     fontSize: 12,
     lineHeight: 12 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.INACTIVE_GREY,
     textAlign: "justify",
   },
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 14,
     lineHeight: 14 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     marginHorizontal: 8,
   },
   cartButton: {

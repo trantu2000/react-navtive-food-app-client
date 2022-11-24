@@ -116,14 +116,14 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
     textAlign: "center",
   },
   title: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     marginTop: 10,
     marginBottom: 50,
@@ -131,14 +131,14 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     marginTop: 10,
     marginBottom: 20,
     marginHorizontal: 20,
   },
   phoneNumberText: {
     fontSize: 18,
-    // fontFamily: Fonts.POPPINS_REGULAR,
+    fontWeight:'600',
     lineHeight: 18 * 1.4,
     color: Colors.DEFAULT_YELLOW,
   },
@@ -175,6 +175,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 18 * 1.4,
     color: Colors.DEFAULT_WHITE,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
   },
 });

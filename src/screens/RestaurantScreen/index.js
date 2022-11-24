@@ -630,7 +630,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 23,
     lineHeight: 23 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
   },
   tagText: {
@@ -638,7 +638,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_GREY,
   },
   ratingReviewsContainer: {
@@ -651,14 +651,14 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_BOLD,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
   },
   reviewsText: {
     marginLeft: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
   },
   deliveryDetailsContainer: {
@@ -672,7 +672,7 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     fontSize: 12,
     lineHeight: 12 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     color: Colors.DEFAULT_BLACK,
   },
   deliveryDetailIcon: {
@@ -694,7 +694,7 @@ const styles = StyleSheet.create({
   restaurantTypeText: {
     fontSize: 12,
     lineHeight: 12 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     color: Colors.DEFAULT_YELLOW,
   },
   categoriesContainer: {

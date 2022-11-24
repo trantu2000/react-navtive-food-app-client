@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
     textAlign: "center",
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   promoCodeText: {
     fontSize: 15,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 15 * 1.4,
     color: Colors.DEFAULT_BLACK,
     marginLeft: 10,
@@ -188,13 +188,13 @@ const styles = StyleSheet.create({
   },
   amountLabelText: {
     fontSize: 15,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     lineHeight: 15 * 1.4,
     color: Colors.DEFAULT_GREEN,
   },
   amountText: {
     fontSize: 15,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     lineHeight: 15 * 1.4,
     color: Colors.DEFAULT_BLACK,
   },
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   totalText: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_SEMI_BOLD,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     color: Colors.DEFAULT_BLACK,
   },
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
   },
   checkoutText: {
     fontSize: 16,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 16 * 1.4,
     color: Colors.DEFAULT_WHITE,
     marginLeft: 8,
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   },
   emptyCartSubText: {
     fontSize: 12,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 12 * 1.4,
     color: Colors.INACTIVE_GREY,
   },
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
   },
   addButtonEmptyText: {
     fontSize: 12,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 12 * 1.4,
     color: Colors.DEFAULT_WHITE,
     marginLeft: 10,

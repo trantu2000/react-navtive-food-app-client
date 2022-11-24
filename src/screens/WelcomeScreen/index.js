@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    // fontFamily: Fonts.POPPINS_EXTRA_BOLD,
+    fontWeight:'600',
     lineHeight: 16 * 1.4,
   },
   gettingStartedButton: {
@@ -172,6 +172,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: Colors.DEFAULT_WHITE,
     lineHeight: 20 * 1.4,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600'
   },
 });

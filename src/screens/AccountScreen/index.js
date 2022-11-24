@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     color: Colors.DEFAULT_WHITE,
   },

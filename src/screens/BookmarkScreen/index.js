@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    // fontFamily: Fonts.POPPINS_MEDIUM,
+    fontWeight:'600',
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
     textAlign: "center",
