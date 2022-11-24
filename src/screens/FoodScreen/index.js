@@ -156,7 +156,7 @@ const FoodScreen = ({
         </View>
         <TouchableOpacity
           style={styles.cartButton}
-          onPress={() => navigation.navigate("Cart")}
+          onPress={() => navigation.navigate("CartScreen")}
           activeOpacity={0.8}
         >
           <Text style={styles.cartButtonText}>đến giỏ hàng</Text>

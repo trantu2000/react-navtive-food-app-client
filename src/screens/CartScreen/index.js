@@ -12,13 +12,16 @@ import Colors from "../../constants/Colors";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
 import { Display } from "../../utils";
-import FoodCart from "../../components/FoodCard";
 import Entypo from "react-native-vector-icons/Entypo";
 import Images from "../../constants/Images";
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { useSelector } from "react-redux";
+import FoodCart from "../../components/FoodCard";
 
-const CartScreen = ({navigation}) => {
-  const [cart, setCart] = useState(3);
+const CartScreen = ({ navigation }) => {
+  const cart = useSelector((state) => state?.cartState?.cart);
+
+  // console.log(cart);
   return (
     <View style={styles.container}>
       <StatusBar
@@ -35,13 +38,19 @@ const CartScreen = ({navigation}) => {
         />
         <Text style={styles.headerTitle}>Giỏ hàng</Text>
       </View>
-      {cart > 0 ? (
+      {cart?.cartItems?.length > 0 ? (
         <>
           <ScrollView>
             <View style={styles.foodList}>
-              <FoodCart />
-              <FoodCart />
-              <FoodCart />
+              {cart?.cartItems?.map((item) => (
+                <FoodCart
+                  {...item?.food}
+                  key={item?.food?.id}
+                  navigate={() =>
+                    navigation.navigate("FoodScreen", { foodId: item?.id })
+                  }
+                />
+              ))}
             </View>
             <View style={styles.promoCodeContainer}>
               <View style={styles.rowAndCenter}>
@@ -57,11 +66,11 @@ const CartScreen = ({navigation}) => {
             <View style={styles.amountContainer}>
               <View style={styles.amountSubContainer}>
                 <Text style={styles.amountLabelText}>Tổng tiền sản phẩm</Text>
-                <Text style={styles.amountText}>200.000 đ</Text>
+                <Text style={styles.amountText}>{cart?.metaData?.itemsTotal?.toFixed(2)} đ</Text>
               </View>
               <View style={styles.amountSubContainer}>
                 <Text style={styles.amountLabelText}>Giảm giá</Text>
-                <Text style={styles.amountText}>15.000 đ</Text>
+                <Text style={styles.amountText}>{cart?.metaData?.discount?.toFixed(2)} đ</Text>
               </View>
               <View style={styles.amountSubContainer}>
                 <Text style={styles.amountLabelText}>Phí giao hàng</Text>
@@ -74,7 +83,7 @@ const CartScreen = ({navigation}) => {
             </View>
             <View style={styles.totalContainer}>
               <Text style={styles.totalText}>Tổng cộng</Text>
-              <Text style={styles.totalText}>185. 000đ</Text>
+              <Text style={styles.totalText}>{cart?.metaData?.grandTotal?.toFixed(2)} đ</Text>
             </View>
             <TouchableOpacity style={styles.checkoutButton}>
               <View style={styles.rowAndCenter}>
@@ -85,7 +94,7 @@ const CartScreen = ({navigation}) => {
                 />
                 <Text style={styles.checkoutText}>Thanh toán</Text>
               </View>
-              <Text style={styles.checkoutText}>185.000 đ</Text>
+              <Text style={styles.checkoutText}>{cart?.metaData?.grandTotal?.toFixed(2)} đ</Text>
             </TouchableOpacity>
             <Separator height={Display.setHeight(9)} />
           </ScrollView>
@@ -97,13 +106,13 @@ const CartScreen = ({navigation}) => {
             source={Images.EMPTY_CART}
             resizeMode="contain"
           />
-            <Text style={styles.emptyCartText}>Giỏ hàng trống</Text>
-            <Text style={styles.emptyCartSubText}>
+          <Text style={styles.emptyCartText}>Giỏ hàng trống</Text>
+          <Text style={styles.emptyCartSubText}>
             Tiến hành đặt hàng ngay nào
           </Text>
           <TouchableOpacity style={styles.addButtonEmpty}>
             <AntDesign name="plus" color={Colors.DEFAULT_WHITE} size={20} />
-            <Text style={styles.addButtonEmptyText}>Thêm món ăn</Text>
+            <Text style={styles.addButtonEmptyText} >Thêm món ăn</Text>
           </TouchableOpacity>
           <Separator height={Display.setHeight(15)} />
         </View>
@@ -214,8 +223,8 @@ const styles = StyleSheet.create({
   },
   emptyCartContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   emptyCartImage: {
     height: Display.setWidth(60),
@@ -234,15 +243,15 @@ const styles = StyleSheet.create({
     color: Colors.INACTIVE_GREY,
   },
   addButtonEmpty: {
-    flexDirection: 'row',
+    flexDirection: "row",
     backgroundColor: Colors.DEFAULT_YELLOW,
     borderRadius: 8,
     paddingHorizontal: Display.setWidth(4),
     paddingVertical: 5,
     marginTop: 10,
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
     elevation: 3,
-    alignItems: 'center',
+    alignItems: "center",
   },
   addButtonEmptyText: {
     fontSize: 12,
