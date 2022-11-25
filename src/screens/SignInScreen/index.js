@@ -66,7 +66,7 @@ const SignInScreen = ({ navigation }) => {
       </View>
       <Text style={styles.title}>Xin chào,</Text>
       <Text style={styles.content}>
-        Nhập email của bạn, chọn tên người dùng và mật khẩu
+        Nhập email  và mật khẩu của bạn
       </Text>
       <View style={styles.inputContainer}>
         <View style={styles.inputSubContainer}>

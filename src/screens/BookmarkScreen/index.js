@@ -60,13 +60,14 @@ const BookmarkScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.DEFAULT_WHITE,
+    // backgroundColor: Colors.DEFAULT_WHITE,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 20,
+    marginTop:20
   },
   headerTitle: {
     fontSize: 20,

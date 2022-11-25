@@ -544,7 +544,7 @@ const RestaurantScreen = ({
               />
               <Text style={styles.deliveryDetailText}>
                 {" "}
-                {restaurant?.time} min
+                {restaurant?.time} phút
               </Text>
             </View>
             <View style={styles.rowAndCenter}>

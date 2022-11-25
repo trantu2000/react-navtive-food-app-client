@@ -42,7 +42,10 @@ const FoodCart = ({ id, name, description, price, image, navigate }) => {
           </Text>
         </TouchableOpacity>
         <View style={styles.footerContainer}>
-          <Text style={styles.priceText}>{price} 000đ</Text>
+          <Text style={styles.priceText}>{(price*1000).toLocaleString("vi", {
+                                  style: "currency",
+                                  currency: "VND",
+                                })}</Text>
           <View style={styles.itemAddContainer}>
             {itemCount > 0 ? (
               <>

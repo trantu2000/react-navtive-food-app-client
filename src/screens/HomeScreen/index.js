@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
             color={Colors.DEFAULT_WHITE}
           />
           <Text style={styles.locationText}>Giao hàng đến</Text>
-          <Text style={styles.selectedLocationText}>Trang chủ</Text>
+          <Text style={styles.selectedLocationText}>412 Nguyễn Văn ...</Text>
           <MaterialIcons
             name="keyboard-arrow-down"
             size={16}

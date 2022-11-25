@@ -66,11 +66,21 @@ const CartScreen = ({ navigation }) => {
             <View style={styles.amountContainer}>
               <View style={styles.amountSubContainer}>
                 <Text style={styles.amountLabelText}>Tổng tiền sản phẩm</Text>
-                <Text style={styles.amountText}>{cart?.metaData?.itemsTotal?.toFixed(2)} đ</Text>
+                <Text style={styles.amountText}>
+                  {(cart?.metaData?.itemsTotal * 1000).toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </Text>
               </View>
               <View style={styles.amountSubContainer}>
                 <Text style={styles.amountLabelText}>Giảm giá</Text>
-                <Text style={styles.amountText}>{cart?.metaData?.discount?.toFixed(2)} đ</Text>
+                <Text style={styles.amountText}>
+                  {(cart?.metaData?.discount).toLocaleString("vi", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </Text>
               </View>
               <View style={styles.amountSubContainer}>
                 <Text style={styles.amountLabelText}>Phí giao hàng</Text>
@@ -83,7 +93,12 @@ const CartScreen = ({ navigation }) => {
             </View>
             <View style={styles.totalContainer}>
               <Text style={styles.totalText}>Tổng cộng</Text>
-              <Text style={styles.totalText}>{cart?.metaData?.grandTotal?.toFixed(2)} đ</Text>
+              <Text style={styles.totalText}>
+                {(cart?.metaData?.grandTotal * 1000).toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </Text>
             </View>
             <TouchableOpacity style={styles.checkoutButton}>
               <View style={styles.rowAndCenter}>
@@ -94,7 +109,12 @@ const CartScreen = ({ navigation }) => {
                 />
                 <Text style={styles.checkoutText}>Đặt hàng</Text>
               </View>
-              <Text style={styles.checkoutText}>{cart?.metaData?.grandTotal?.toFixed(2)} đ</Text>
+              <Text style={styles.checkoutText}>
+                {(cart?.metaData?.grandTotal*1000).toLocaleString("vi", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </Text>
             </TouchableOpacity>
             <Separator height={Display.setHeight(9)} />
           </ScrollView>
@@ -112,7 +132,7 @@ const CartScreen = ({ navigation }) => {
           </Text>
           <TouchableOpacity style={styles.addButtonEmpty}>
             <AntDesign name="plus" color={Colors.DEFAULT_WHITE} size={20} />
-            <Text style={styles.addButtonEmptyText} >Thêm món ăn</Text>
+            <Text style={styles.addButtonEmptyText}>Thêm món ăn</Text>
           </TouchableOpacity>
           <Separator height={Display.setHeight(15)} />
         </View>
@@ -126,7 +146,7 @@ export default CartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.DEFAULT_WHITE,
+    // backgroundColor: Colors.DEFAULT_WHITE,
   },
   headerContainer: {
     flexDirection: "row",
@@ -137,7 +157,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 20 * 1.4,
     width: Display.setWidth(80),
     textAlign: "center",
@@ -161,7 +181,7 @@ const styles = StyleSheet.create({
   },
   promoCodeText: {
     fontSize: 15,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 15 * 1.4,
     color: Colors.DEFAULT_BLACK,
     marginLeft: 10,
@@ -179,13 +199,13 @@ const styles = StyleSheet.create({
   },
   amountLabelText: {
     fontSize: 15,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 15 * 1.4,
     color: Colors.DEFAULT_GREEN,
   },
   amountText: {
     fontSize: 15,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 15 * 1.4,
     color: Colors.DEFAULT_BLACK,
   },
@@ -198,7 +218,7 @@ const styles = StyleSheet.create({
   },
   totalText: {
     fontSize: 20,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 20 * 1.4,
     color: Colors.DEFAULT_BLACK,
   },
@@ -216,7 +236,7 @@ const styles = StyleSheet.create({
   },
   checkoutText: {
     fontSize: 16,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 16 * 1.4,
     color: Colors.DEFAULT_WHITE,
     marginLeft: 8,
@@ -238,7 +258,7 @@ const styles = StyleSheet.create({
   },
   emptyCartSubText: {
     fontSize: 12,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 12 * 1.4,
     color: Colors.INACTIVE_GREY,
   },
@@ -255,7 +275,7 @@ const styles = StyleSheet.create({
   },
   addButtonEmptyText: {
     fontSize: 12,
-    fontWeight:'600',
+    fontWeight: "600",
     lineHeight: 12 * 1.4,
     color: Colors.DEFAULT_WHITE,
     marginLeft: 10,

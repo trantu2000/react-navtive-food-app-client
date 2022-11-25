@@ -287,8 +287,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 30,
-    marginTop: 10,
+    paddingVertical: 20,
+    marginTop:10
   },
   headerTitle: {
     fontSize: 20,
@@ -306,7 +306,6 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 20,
     fontWeight:'600',
-    marginTop: 10,
     marginBottom: 20,
     marginHorizontal: 20,
   },
@@ -318,7 +317,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: Colors.LIGHT_GREY2,
     justifyContent: "center",
-    marginTop: 10,
+    
   },
   inputSubContainer: {
     flexDirection: "row",
@@ -363,7 +362,7 @@ const styles = StyleSheet.create({
     height: Display.setHeight(6),
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
   signInButtonText: {
     fontSize: 18,

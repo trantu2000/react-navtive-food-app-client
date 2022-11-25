@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
   },
   bookmark: {
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: 15,
+    right: 15,
     zIndex: 100,
   },
   tagText: {

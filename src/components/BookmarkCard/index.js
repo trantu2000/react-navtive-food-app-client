@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    backgroundColor:Colors.DEFAULT_WHITE
   },
   posterStyle: {
     width: 80,

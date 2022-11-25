@@ -81,7 +81,13 @@ const FoodScreen = ({
         <View style={styles.mainContainer}>
           <View style={styles.titleHeaderContainer}>
             <Text style={styles.titleText}>{food?.name}</Text>
-            <Text style={styles.priceText}> {food?.price} đ</Text>
+            <Text style={styles.priceText}>
+              {" "}
+              {(food?.price*1000).toLocaleString("vi", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </Text>
           </View>
           <View style={styles.subHeaderContainer}>
             <View style={styles.rowAndCenter}>
@@ -124,22 +130,20 @@ const FoodScreen = ({
           <View style={styles.detailsContainer}>
             {food?.description ? (
               <>
-                <Text style={styles.detailHeader}>Description</Text>
+                <Text style={styles.detailHeader}>Mô tả</Text>
                 <Text style={styles.detailContent}>{food?.description}</Text>
               </>
             ) : null}
             {food?.ingredients ? (
               <>
-                <Text style={styles.detailHeader}>Ingredients</Text>
+                <Text style={styles.detailHeader}>Thành phần</Text>
                 <Text style={styles.detailContent}>{food?.ingredients}</Text>
               </>
             ) : null}
           </View>
-          
         </View>
       </ScrollView>
       <View style={styles.buttonsContainer}>
-       
         <View style={styles.itemAddContainer}>
           <AntDesign
             name="minus"
@@ -203,13 +207,13 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 23,
     lineHeight: 23 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     color: Colors.DEFAULT_BLACK,
   },
   priceText: {
     fontSize: 23,
     lineHeight: 23 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     color: Colors.DEFAULT_YELLOW,
   },
   subHeaderContainer: {
@@ -266,7 +270,7 @@ const styles = StyleSheet.create({
   subMenuButtonText: {
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     color: Colors.DEFAULT_BLACK,
   },
   detailsContainer: {
@@ -275,7 +279,7 @@ const styles = StyleSheet.create({
   detailHeader: {
     fontSize: 15,
     lineHeight: 15 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     color: Colors.DEFAULT_BLACK,
     marginTop: 10,
     marginBottom: 2,
@@ -283,7 +287,7 @@ const styles = StyleSheet.create({
   detailContent: {
     fontSize: 12,
     lineHeight: 12 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     color: Colors.INACTIVE_GREY,
     textAlign: "justify",
   },
@@ -310,7 +314,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 14,
     lineHeight: 14 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     marginHorizontal: 8,
   },
   cartButton: {
