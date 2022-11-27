@@ -8,17 +8,25 @@ const CategoryMenuItem = ({
   logo,
   activeCategory,
   setActiveCategory,
+  navigate,
 }) => {
   return (
     <TouchableOpacity
-      onPress={() => setActiveCategory(name)}
+    onPress={() => setActiveCategory(name)}
       style={styles.category()}
+      
     >
       <Image
         source={Images[logo]}
         style={styles.categoryIcon(activeCategory === name)}
+       
       />
-      <Text style={styles.categoryText(activeCategory === name)}>{name}</Text>
+      <Text
+        style={styles.categoryText(activeCategory === name)}
+        onPress={() =>  navigate()}
+      >
+        {name}
+      </Text>
     </TouchableOpacity>
   );
 };

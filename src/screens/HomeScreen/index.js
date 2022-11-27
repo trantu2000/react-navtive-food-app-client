@@ -20,8 +20,10 @@ import Mock from "../../constants/Mock";
 import CategoryMenuItem from "../../components/CategoryMenuItem";
 import RestaurantCard from "../../components/RestaurantCard";
 import RestaurantMediumCard from "../../components/RestaurantMediumCard";
-import { RestaurantService } from "../../services";
-
+import { FoodService, RestaurantService } from "../../services";
+import FoodCart from "../../components/FoodCard";
+import { useDispatch, useSelector } from "react-redux";
+import CategoryActions from "../../Redux/Actions/CategoryActions";
 
 const sortStyle = (isActive) =>
   isActive
@@ -32,10 +34,26 @@ const HomeScreen = ({ navigation }) => {
   const [activeCategory, setActiveCategory] = useState();
   const [restaurants, setRestaurants] = useState(null);
   const [activeSortItem, setActiveSortItem] = useState("Gần đây");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [foods, setFoods] = useState(null);
 
+  const dispatch = useDispatch();
+
+  // console.log(activeCategory);
+
+  const category = useSelector((state) => state?.categoryState?.category);
+
+  // const handleCategory = ()=>{
+  //   setCategory(activeSortItem)
+  //   console.log(category);
+  // }
+  // const addCategory = (activeCategory) =>
+  //   dispatch(CategoryActions.setCategory({ activeCategory }));
+
+  // console.log(category);
 
   useEffect(() => {
-
+    dispatch(CategoryActions.setCategory({ activeCategory }))
     const unsubscribe = navigation.addListener("focus", () => {
       RestaurantService.getRestaurants().then((response) => {
         if (response?.status) {
@@ -44,9 +62,8 @@ const HomeScreen = ({ navigation }) => {
       });
     });
     return unsubscribe;
-  }, []);
-
-
+  }, [activeCategory]);
+  
 
   return (
     <View style={styles.container}>
@@ -105,10 +122,15 @@ const HomeScreen = ({ navigation }) => {
               logo={logo}
               activeCategory={activeCategory}
               setActiveCategory={setActiveCategory}
+              navigate={() =>
+                navigation.navigate("FilterFoodScreen", { activeCategory })
+              }
+             
             />
           ))}
         </View>
       </View>
+
       <ScrollView style={styles.listContainer}>
         <View style={styles.horizontalListContainer}>
           <View style={styles.listHeader}>
@@ -219,14 +241,14 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
   },
   selectedLocationText: {
     color: Colors.DEFAULT_YELLOW,
     marginLeft: 5,
     fontSize: 14,
     lineHeight: 14 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
   },
   alertBadge: {
     backgroundColor: Colors.DEFAULT_YELLOW,
@@ -264,7 +286,7 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_GREY,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
     marginLeft: 10,
   },
   categoriesContainer: {
@@ -291,13 +313,13 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 16,
     lineHeight: 16 * 1.4,
-    fontWeight:'600'
+    fontWeight: "600",
   },
   listHeaderSubtitle: {
     color: Colors.DEFAULT_YELLOW,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
   },
   sortListContainer: {
     flexDirection: "row",
@@ -319,6 +341,6 @@ const styles = StyleSheet.create({
     color: Colors.DEFAULT_BLACK,
     fontSize: 13,
     lineHeight: 13 * 1.4,
-    fontWeight:'600',
+    fontWeight: "600",
   },
 });

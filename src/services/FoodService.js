@@ -32,4 +32,33 @@ const getOneFoodById = async (foodId) => {
   }
 };
 
-export default { getOneFoodById };
+const getAllFood = async () => {
+  console.log(`FoodService | getAllFood`);
+  try {
+    let foodResponse = await axios.get(
+      `${ApiConstants.BACKEND_API.BASE_API_URL}${ApiConstants.BACKEND_API.FOOD}/`,
+      {
+        headers: authHeader(getToken()),
+      }
+    );
+    if (foodResponse?.status === 200) {
+      return {
+        status: true,
+        message: `Food data fetched`,
+        data: foodResponse?.data?.data,
+      };
+    } else {
+      return {
+        status: false,
+        message: `Food data not found`,
+      };
+    }
+  } catch (error) {
+    return {
+      status: false,
+      message: `Food data not found`,
+    };
+  }
+};
+
+export default { getOneFoodById ,getAllFood};

@@ -465,6 +465,7 @@ const RestaurantScreen = ({
   const [restaurant, setRestaurant] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   
+  
 
   useEffect(() => {
     RestaurantService.getOneRestaurantById(restaurantId).then((response) => {
