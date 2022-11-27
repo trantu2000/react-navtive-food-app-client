@@ -140,7 +140,7 @@ const HomeScreen = ({ navigation }) => {
             >
               Xếp hạng hàng đầu
             </Text>
-            <Text style={styles.listHeaderSubtitle}>Xem tất cả</Text>
+            {/* <Text style={styles.listHeaderSubtitle} >Xem tất cả</Text> */}
           </View>
           <FlatList
             data={restaurants}

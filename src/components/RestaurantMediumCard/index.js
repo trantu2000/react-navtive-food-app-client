@@ -28,9 +28,9 @@ const RestaurantMediumCard = ({
           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>{name}</Text>
             <View style={styles.rowAndCenter}>
-              <FontAwesome />
+              <FontAwesome name="star" color={Colors.DEFAULT_YELLOW} />
               <Text style={styles.ratingText}>4.2</Text>
-              <Text style={styles.reviewsText}>({233})</Text>
+              {/* <Text style={styles.reviewsText}>({233})</Text> */}
             </View>
           </View>
           <Text style={styles.tagsText}>{tags?.join(" • ")}</Text>
@@ -47,11 +47,11 @@ const RestaurantMediumCard = ({
                 source={Images.DELIVERY_TIME}
                 style={styles.deliveryDetailsIcon}
               />
-              <Text style={styles.deliveryDetailsText}>30 phút</Text>
+              <Text style={styles.deliveryDetailsText}>{time} phút</Text>
             </View>
             <View style={styles.rowAndCenter}>
               <Image style={styles.deliveryDetailsIcon} />
-              <Text style={styles.deliveryDetailsText}>5000</Text>
+              <Text style={styles.deliveryDetailsText}>{distance*1/1000} km</Text>
             </View>
           </View>
         </View>
