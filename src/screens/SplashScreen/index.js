@@ -19,6 +19,9 @@ const SplashScreen = () => {
       />
       <Image source={Images.PLATE} style={styles.image} resizeMode="contain" />
       <Text style={styles.titleText}>Food App</Text>
+      <Text style={styles.titleSubText1}>Team: </Text>
+      <Text style={styles.titleSubText2}>Cùng nhau qua môn </Text>
+      <Text style={styles.titleSubText2}>S22-61TH1</Text>
     </View>
   );
 };
@@ -33,12 +36,23 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DEFAULT_GREEN,
   },
   image: {
-    height: Display.setHeight(30),
-    width: Display.setWidth(55),
+    height: Display.setHeight(20),
+    width: Display.setWidth(30),
   },
   titleText: {
     fontSize: 32,
     color: Colors.DEFAULT_WHITE,
     fontWeight:'600'
   },
+  titleSubText1:{
+    fontSize: 25,
+    color: Colors.DEFAULT_WHITE,
+    marginTop:10
+  },
+  titleSubText2:{
+    fontSize: 32,
+    color: Colors.DEFAULT_WHITE,
+    marginTop:3,
+    fontWeight:'600'
+  }
 });
