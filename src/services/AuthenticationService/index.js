@@ -9,7 +9,7 @@ const AuthRequest = axios.create({
 
 const register = async (user) => {
   if (!user?.username || !user?.email || !user?.password) {
-    return { status: false, message: "Please fill up all fields" };
+    return { status: false, message: "Vui lòng điền thông tin vào chỗ trống!" };
   }
   try {
     let requestBody = {
@@ -44,7 +44,7 @@ const checkUserExist = async (type, value) => {
 
 const login = async (user) => {
   if (!user?.username || !user?.password) {
-    return { status: false, message: "Please fill up all fields" };
+    return { status: false, message: "Vui lòng điền thông tin vào chỗ trống!" };
   }
   try {
     let requestBody = {

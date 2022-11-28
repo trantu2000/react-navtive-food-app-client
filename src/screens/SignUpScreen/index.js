@@ -218,7 +218,7 @@ const SignInScreen = ({ navigation }) => {
           />
         </View>
       </View>
-      <Text style={styles.errorMessage}>{errorMessage}</Text>
+      {/* <Text style={styles.errorMessage}>{errorMessage}</Text> */}
 
       <TouchableOpacity style={styles.signInButton} onPress={() => register()}>
         {isLoading ? (
