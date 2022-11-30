@@ -71,7 +71,7 @@ const OrderSuccessScreen = ({ navigation }) => {
         <Image style={styles.image} source={Images.ORDERSUCCESS} />
         <Text style={styles.subTitle2}>Vui lòng chờ nhà hàng</Text>
         <Text style={styles.subTitle2}>Đơn hàng sẽ nhanh chóng giao đến!!</Text>
-        <Text style={styles.subTitle3} onPress={() => navigation.navigate("CartScreen")}>Xem đơn đặt hàng</Text>
+        <Text style={styles.subTitle3} onPress={() => navigation.navigate("ListOrderScreen")}>Xem đơn đặt hàng</Text>
       </View>
 
       <TouchableOpacity
