@@ -20,4 +20,5 @@ export default {
   AVATAR: require('../../assets/images/user_avatar.png'),
   MOMO: require('../../assets/images/MoMo_Logo.png'),
   VISACARD: require('../../assets/images/VisaCard.png'),
+  ORDERSUCCESS: require('../../assets/images/order_success.png'),
 };

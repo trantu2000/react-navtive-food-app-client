@@ -42,17 +42,21 @@ const PaymentScreen = ({ navigation }) => {
   };
 
   const createTwoButtonAlert = () =>
-    Alert.alert("Đặt hàng thành công", "Vui lòng đợi nhà hàng", 
-    
-    [
-        
-      {
-        text: "Đóng",
-        onPress: () => {()=>navigation.navigate("CartScreen")},
-        style: "cancel",
-      },
-      // { text: "OK", onPress: () => console.log("OK Pressed") },
-    ]);
+    Alert.alert(
+      "Đặt hàng thành công",
+      "Vui lòng đợi nhà hàng",
+
+      [
+        {
+          text: "Đóng",
+          onPress: () => {
+            () => navigation.navigate("CartScreen");
+          },
+          style: "cancel",
+        },
+        // { text: "OK", onPress: () => console.log("OK Pressed") },
+      ]
+    );
   return (
     <View style={styles.container}>
       <StatusBar
@@ -128,7 +132,10 @@ const PaymentScreen = ({ navigation }) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.buttonContinue} onPress={createTwoButtonAlert}>
+      <TouchableOpacity
+        style={styles.buttonContinue}
+        onPress={() => navigation.navigate("OrderSuccessScreen")}
+      >
         <Text style={styles.buttonText}>Xác nhận đặt hàng</Text>
       </TouchableOpacity>
     </View>
