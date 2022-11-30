@@ -100,7 +100,7 @@ const CartScreen = ({ navigation }) => {
                 })}
               </Text>
             </View>
-            <TouchableOpacity style={styles.checkoutButton}>
+            <TouchableOpacity style={styles.checkoutButton} onPress={()=>navigation.navigate("PaymentScreen")}>
               <View style={styles.rowAndCenter}>
                 <IonIcons
                   name="cart-outline"
@@ -130,7 +130,7 @@ const CartScreen = ({ navigation }) => {
           <Text style={styles.emptyCartSubText}>
             Tiến hành đặt hàng ngay nào
           </Text>
-          <TouchableOpacity style={styles.addButtonEmpty}>
+          <TouchableOpacity style={styles.addButtonEmpty} onPress={()=>navigation.navigate("HomeScreen")}>
             <AntDesign name="plus" color={Colors.DEFAULT_WHITE} size={20} />
             <Text style={styles.addButtonEmptyText}>Thêm món ăn</Text>
           </TouchableOpacity>

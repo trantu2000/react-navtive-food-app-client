@@ -21,15 +21,11 @@ import { GeneralAction } from "../../Redux/Actions";
 import UserService from "../../services/UserService";
 
 const ProfileScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const [user, setUser] = useState(null);
 
-  const logout = () => {
-    StorageService.setToken("").then(() => {
-      dispatch(GeneralAction.setToken(""));
-      dispatch(GeneralAction.setUserData(null));
-    });
-  };
+  const [user, setUser] = useState(null);
+ 
+
+
 
   useEffect(() => {
     UserService.getUserData().then((response) => {
@@ -79,7 +75,7 @@ const ProfileScreen = ({ navigation }) => {
               size={17}
               color={Colors.DEFAULT_GREEN}
             />
-            <Text style={styles.sectionText}>Trần Thanh Tú</Text>
+            <Text style={styles.sectionText}>{user?.data?.username}</Text>
           </View>
           <MaterialCommunityIcons
             name="pencil"
@@ -105,7 +101,7 @@ const ProfileScreen = ({ navigation }) => {
               size={17}
               color={Colors.DEFAULT_GREEN}
             />
-            <Text style={styles.sectionText}>tttuab@gmail.com</Text>
+            <Text style={styles.sectionText}>{user?.data?.email}</Text>
           </View>
           <Feather
             name="chevron-right"
@@ -287,7 +283,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     // fontFamily: Fonts.POPPINS_REGULAR,
     lineHeight: 13 * 1.4,
-    color: Colors.INACTIVE_GREY,
+    color: Colors.DEFAULT_BLACK,
     marginLeft: 10,
   },
 

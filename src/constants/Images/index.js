@@ -18,4 +18,6 @@ export default {
   EMPTY_CART: require('../../assets/images/empty_cart.png'),
   LOADING: require('../../assets/images/loading.json'),
   AVATAR: require('../../assets/images/user_avatar.png'),
+  MOMO: require('../../assets/images/MoMo_Logo.png'),
+  VISACARD: require('../../assets/images/VisaCard.png'),
 };

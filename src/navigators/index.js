@@ -18,6 +18,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { GeneralAction } from "../Redux/Actions";
 import FilterFoodScreen from "../screens/FilterFoodScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import PaymentScreen from "../screens/PaymentScreen";
+import OrderSuccessScreen from "../screens/OrderSuccessScreen";
 
 const Stack = createStackNavigator();
 
@@ -65,8 +67,13 @@ const Navigators = () => {
               component={RestaurantScreen}
             />
             <Stack.Screen name="FoodScreen" component={FoodScreen} />
-            <Stack.Screen name="FilterFoodScreen" component={FilterFoodScreen} />
+            <Stack.Screen
+              name="FilterFoodScreen"
+              component={FilterFoodScreen}
+            />
             <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+            <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
+            <Stack.Screen name="OrderSuccessScreen" component={OrderSuccessScreen} />
           </>
         )}
       </Stack.Navigator>
