@@ -17,6 +17,7 @@ import HomeTabs from "./BottomTabs";
 import { useSelector, useDispatch } from "react-redux";
 import { GeneralAction } from "../Redux/Actions";
 import FilterFoodScreen from "../screens/FilterFoodScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Stack = createStackNavigator();
 
@@ -65,6 +66,7 @@ const Navigators = () => {
             />
             <Stack.Screen name="FoodScreen" component={FoodScreen} />
             <Stack.Screen name="FilterFoodScreen" component={FilterFoodScreen} />
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           </>
         )}
       </Stack.Navigator>

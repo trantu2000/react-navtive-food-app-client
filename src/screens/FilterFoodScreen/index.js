@@ -26,7 +26,7 @@ const FilterFoodScreen = ({ navigation }) => {
   //console.log(foods);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const category = useSelector((state) => state?.categoryState?.category);
-  console.log(category['activeCategory']);
+  // console.log(category['activeCategory']);
 
 
 
