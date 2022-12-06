@@ -12,10 +12,8 @@ import {
   import Separator from "../../components/Separator";
   import IonIcons from "react-native-vector-icons/Ionicons";
   import { Display } from "../../utils";
-  import Entypo from "react-native-vector-icons/Entypo";
   import Images from "../../constants/Images";
   import AntDesign from "react-native-vector-icons/AntDesign";
-  import { useSelector } from "react-redux";
   import FoodCart from "../../components/FoodCard";
   
   const ListOrderScreen = ({ navigation }) => {

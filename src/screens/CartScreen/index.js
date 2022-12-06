@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Colors from "../../constants/Colors";
 import Separator from "../../components/Separator";
 import IonIcons from "react-native-vector-icons/Ionicons";
@@ -15,11 +15,29 @@ import { Display } from "../../utils";
 import Entypo from "react-native-vector-icons/Entypo";
 import Images from "../../constants/Images";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { useSelector } from "react-redux";
 import FoodCart from "../../components/FoodCard";
+import { useDispatch, useSelector } from "react-redux";
+import CartAction from "../../Redux/Actions/CartAction";
+import { CartService } from "../../services";
 
 const CartScreen = ({ navigation }) => {
-  const cart = useSelector((state) => state?.cartState?.cart);
+  // const cart = useSelector((state) => state?.cartState?.cart);
+
+  const [cart, setCarts] = useState("")
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(CartAction.getCartItems())
+    const unsubscribe = navigation.addListener("focus", () => {
+     CartService.getCartItems().then((response) => {
+        if (response?.status) {
+          setCarts(response?.data);
+          // console.log(response?.data);
+        }
+      });
+    });
+    return unsubscribe;
+  }, []);
 
   // console.log(cart);
   return (

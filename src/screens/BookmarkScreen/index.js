@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {View, Text, StyleSheet, StatusBar, FlatList} from 'react-native';
 import IonIcons from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
 import BookmarkCard from '../../components/BookmarkCard';
 import Separator from '../../components/Separator';
 import Colors from '../../constants/Colors';
 import { Display } from '../../utils';
+import { useDispatch, useSelector } from "react-redux";
+import BookmarkAction from '../../Redux/Actions/BookmarkAction';
+import { BookmarkService } from '../../services';
 
 const ListItemSeparator = () => (
   <View
@@ -19,7 +21,22 @@ const ListItemSeparator = () => (
 );
 
 const BookmarkScreen = ({navigation}) => {
-  const bookmarks = useSelector(state => state?.bookmarkState?.bookmarks);
+  const dispatch = useDispatch();
+  // const bookmarks = useSelector(state => state?.bookmarkState?.bookmarks);
+  const [bookmarks, setBookmarks] = useState("")
+
+  useEffect(() => {
+    dispatch(BookmarkAction.getBookmarks())
+    const unsubscribe = navigation.addListener("focus", () => {
+     BookmarkService.getBookmarks().then((response) => {
+        if (response?.status) {
+          setBookmarks(response?.data);
+          // console.log(response?.data);
+        }
+      });
+    });
+    return unsubscribe;
+  }, []);
   return (
     <View style={styles.container}>
       <StatusBar

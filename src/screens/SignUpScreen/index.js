@@ -237,7 +237,7 @@ const SignInScreen = ({ navigation }) => {
         </Text>
       </View>
       <Text style={styles.orText}>-hoặc-</Text>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.phoneButton}
         onPress={() => navigation.navigate("RegisterPhoneScreen")}
       >
@@ -250,7 +250,7 @@ const SignInScreen = ({ navigation }) => {
             Đăng nhập với Số điện thoại
           </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity style={styles.facebookButton}>
         <View style={styles.socialButtonsContainer}>
           <View style={styles.signInButtonLogoContainer}>
