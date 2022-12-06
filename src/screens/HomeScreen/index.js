@@ -20,8 +20,7 @@ import Mock from "../../constants/Mock";
 import CategoryMenuItem from "../../components/CategoryMenuItem";
 import RestaurantCard from "../../components/RestaurantCard";
 import RestaurantMediumCard from "../../components/RestaurantMediumCard";
-import { FoodService, RestaurantService } from "../../services";
-import FoodCart from "../../components/FoodCard";
+import {  RestaurantService } from "../../services";
 import { useDispatch, useSelector } from "react-redux";
 import CategoryActions from "../../Redux/Actions/CategoryActions";
 

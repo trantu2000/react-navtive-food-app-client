@@ -13,6 +13,8 @@ const BookmarkCard = ({ id, name, images, location, tags, navigate }) => {
 
   const removeBookmark = () =>
     dispatch(BookmarkAction.removeBookmark({ restaurantId: id }));
+
+  
   return (
     <TouchableOpacity onPress={() => navigate(id)}>
       <View style={styles.container}>
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor:Colors.DEFAULT_WHITE
+    backgroundColor: Colors.DEFAULT_WHITE,
   },
   posterStyle: {
     width: 80,

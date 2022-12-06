@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Colors from "../../constants/Colors";
 import { Display } from "../../utils";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -8,17 +8,30 @@ import { StaticImageService } from "../../services";
 import { useDispatch, useSelector } from "react-redux";
 import CartAction from "../../Redux/Actions/CartAction";
 
-const FoodCart = ({ id, name, description, price, image, navigate }) => {
+const FoodCart = ({
+  id,
+  name,
+  description,
+  price,
+  image,
+  navigate,
+  navigation,
+}) => {
   const dispatch = useDispatch();
   const itemCount = useSelector(
     (state) =>
       state?.cartState?.cart?.cartItems?.find((item) => item?.foodId === id)
         ?.count
   );
+  // console.log(itemCount);
+  // console.log(id);
 
   const addToCart = (foodId) => dispatch(CartAction.addToCart({ foodId }));
   const removeFromCart = (foodId) =>
     dispatch(CartAction.removeFromCart({ foodId }));
+
+
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigate()} activeOpacity={0.8}>
@@ -42,10 +55,12 @@ const FoodCart = ({ id, name, description, price, image, navigate }) => {
           </Text>
         </TouchableOpacity>
         <View style={styles.footerContainer}>
-          <Text style={styles.priceText}>{(price*1000).toLocaleString("vi", {
-                                  style: "currency",
-                                  currency: "VND",
-                                })}</Text>
+          <Text style={styles.priceText}>
+            {(price * 1000).toLocaleString("vi", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </Text>
           <View style={styles.itemAddContainer}>
             {itemCount > 0 ? (
               <>
