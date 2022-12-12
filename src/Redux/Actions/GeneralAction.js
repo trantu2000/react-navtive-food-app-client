@@ -1,5 +1,7 @@
-import { AuthenticationService, StorageService } from "../../services";
-import UserService from "../../services/UserService";
+import { AuthenticationService, StorageService, UserService } from "../../services";
+import BookmarkAction from "./BookmarkAction";
+import CartAction from "./CartAction";
+
 
 const types = {
   SET_IS_APP_LOADING: "SET_IS_APP_LOADING",

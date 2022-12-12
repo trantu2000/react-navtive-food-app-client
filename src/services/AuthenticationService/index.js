@@ -24,7 +24,7 @@ const register = async (user) => {
     return registerResponse?.data;
   } catch (error) {
     console.log(error);
-    return { status: false, message: "Oops! Something went wrong" };
+    return { status: false, message: "Đã xảy ra sự cố" };
   }
 };
 
@@ -38,7 +38,7 @@ const checkUserExist = async (type, value) => {
     return userCheckResponse?.data;
   } catch (error) {
     console.log(error);
-    return { status: false, message: "Oops! Something went wrong" };
+    return { status: false, message: "Đã xảy ra sự cố" };
   }
 };
 
@@ -58,7 +58,7 @@ const login = async (user) => {
     return loginResponse?.data;
   } catch (error) {
     console.log(error);
-    return { status: false, message: "Oops! Something went wrong" };
+    return { status: false, message: "Đã xảy ra sự cố" };
   }
 };
 
@@ -75,7 +75,7 @@ const refreshToken = async () => {
     }
   } catch (error) {
     console.log(error);
-    return { status: false, message: "Oops! Something went wrong" };
+    return { status: false, message: "Đã xảy ra sự cố" };
   }
 };
 
