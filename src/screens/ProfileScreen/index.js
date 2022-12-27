@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   profileImageContainer: {
     backgroundColor: Colors.DEFAULT_WHITE,
-    borderRadius: "100%",
+    borderRadius:100,
     justifyContent: "center",
     alignItems: "center",
     padding: 1,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: Display.setWidth(28),
     height: Display.setWidth(28),
-    borderRadius: "100%",
+    borderRadius: 100,
   },
   profileTextContainer: {
     marginLeft: 10,

@@ -37,6 +37,6 @@
   },
   "private": true,
   "projectConfig": {
-    "backendApiBaseUrl": "http://172.20.10.3:3000"
+    "backendApiBaseUrl": "http://192.168.1.11:3000"
   }
 }
